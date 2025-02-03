@@ -1,0 +1,8 @@
+Temp
+
+Library/ShaderCache
+Library/StateCache
+Library/PackageCache
+Library/Artifacts
+*.cache
+*.log
