@@ -3,9 +3,9 @@ RGB画像と深度データを生成するための機能追加
 
 
 ## 概要
-・VR-Capsの3Dモデルから自動でカメラパスに沿ってRGB画像またはDepthデータの取得を可能にした  
+・VR-Capsの3Dモデルからカメラパスに沿ってRGB画像またはDepthデータの自動取得が可能
 
-・カメラパスを任意に作成も可能  (デフォルトでは事前に作成したカメラパスを使用)  
+・カメラパスの任意作成が可能  (デフォルトでは事前に作成したカメラパスを使用)  
 
 ## 開発環境
 ・Unity (version: 2019.3.3f1)  
@@ -13,10 +13,10 @@ RGB画像と深度データを生成するための機能追加
 ・Anaconda  
 ・Python 3.10  
 
-## Getting Started
+## 始め方
 
-### 1. Installation
-#### Clone the Repository
+### 1. インストール
+#### レポジトリのクローン
 ```sh
 git clone https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy/our_project.git
 ```
