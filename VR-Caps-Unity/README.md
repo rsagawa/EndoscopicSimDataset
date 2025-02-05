@@ -8,7 +8,7 @@ RGB画像と深度データを生成するための機能追加
 ・カメラパスの任意作成が可能  (デフォルトでは事前に作成したカメラパスを使用)  
 
 ## 開発環境
-・Unity (version: 2019.3.3f1)  
+・Unity version: 2019.3.3f1  
 ・Unity Hub  
 ・Anaconda  
 ・Python 3.10  
@@ -52,12 +52,11 @@ VR-Caps-Unity>Assets>Scenes>Record_scene.unity
    保存先のパスに深度画像データ(.exr)が生成される  
 
 ### 3. パターンの投影  
+1. Hierarchy Window>Capsule>Camera>を選択  
 
-1. RGBSave.csのチェックボックスを有効  
+2. RGBSave.csのチェックボックスを有効  
    
-2. Patternのチェックボックスの有効でパターンを起動  
-
-3. Camera PreViewで投影を確認  
+3. RGBSave.cs>Patternのチェックボックスの有効で光源を起動  
 
 
 ## その他
