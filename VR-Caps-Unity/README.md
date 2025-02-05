@@ -28,41 +28,31 @@ VR-Caps-Unity>Assets>Scenes>Record_scene.unity
 
 #### RGB画像の生成  
 1. Hierarchy Window>Capsule>Camera>を選択  
-   ![camera](readme_imgs/Unity_figure_RGB_camera.png)
 2. RGBSave.csのチェックボックスを有効  
-   ![checkbox](readme_imgs/Unity_figure_RGB_checkbox.png)
 3. RGBSave.cs>Save File Path の空欄に保存先の絶対パスを記入  
-   ![path](readme_imgs/Unity_figure_RGB_path.png)
+   ![setting](readme_imgs/Unity_figure_RGB_all.png)
 4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
-   ![start](readme_imgs/Unity_figure_start.png)
    保存先のパスにRGB画像(.png)が生成される  
 
 
 #### 深度画像の生成  
-1. Edit Tab>Project Setting>HDRP Default Settings>一番下のAfter Post Process>DepthExampleを指定  
-   ![setting](readme_imgs/Unity_figure_Depth_edit_tab_project_setting.png)
-   ![setting](readme_imgs/Unity_figure_Depth_after_post_process.png)
+1. Edit Tab>Project Setting>HDRP Default Settings>一番下のAfter Post Process>DepthExampleを指定
+   ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)
+   ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
    
 3. Hierarchy Window>Capsule>Camera>を選択  
-   ![camera](readme_imgs/Unity_figure_RGB_camera.png)
-
 4. DepthSave.csのチェックボックスを有効  
-   ![checkbox](readme_imgs/Unity_figure_Depth_checkbox.png)
-
-5. DepthSave.cs>Save File Path の空欄に保存先の絶対パスを記入  
-   ![path](readme_imgs/Unity_figure_Depth_path.png)
-
+5. DepthSave.cs>Save File Path の空欄に保存先の絶対パスを記入
+   ![setting](readme_imgs/Unity_Depth_all.png)  
 6. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
-   ![start](readme_imgs/Unity_figure_start.png)
    保存先のパスに深度画像データ(.exr)が生成される  
 
 ### 3. パターンの投影  
 1. Hierarchy Window>Capsule>Camera>を選択  
-   ![camera](readme_imgs/Unity_figure_RGB_camera.png)  
 2. RGBSave.csのチェックボックスを有効  
-   ![checkbox](readme_imgs/Unity_figure_RGB_checkbox.png)
 3. RGBSave.cs>Patternのチェックボックスの有効で光源を起動  
-   ![path](readme_imgs/Unity_figure_RGB_pattern.png)
+   ![setting](readme_imgs/Unity_figure_RGB_pattern_all.png)  
+
 
 ## その他
 
