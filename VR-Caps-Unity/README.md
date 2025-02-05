@@ -8,7 +8,7 @@ RGB画像と深度データを生成するための機能追加
 ・カメラパスの任意作成が可能  (デフォルトでは事前に作成したカメラパスを使用)  
 
 ## 開発環境
-・Unity (version: 2019.3.3f1)  
+・Unity version: 2019.3.3f1  
 ・Unity Hub  
 ・Anaconda  
 ・Python 3.10  
@@ -18,44 +18,45 @@ RGB画像と深度データを生成するための機能追加
 ### 1. インストール
 #### レポジトリのクローン
 ```sh
-git clone https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy/our_project.git
-```
+https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git  
+```  
 
-### 2. 画像生成  
+#### プロジェクトの起動  
+VR-Caps-Unity>Assets>Scenes>Record_scene.unity 
+
+### 2. データ作成方法  
 
 #### RGB画像の生成  
-
-1. RGBSave.csにチェックして有効を確認  
-
-2. 保存先のパスを記入  
-
-3. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
-
-   指定先のパスにRGB画像(.png)が保存される  
+1. Hierarchy Window>Capsule>Camera>を選択  
+2. RGBSave.csのチェックボックスを有効  
+3. RGBSave.cs>Save File Path の空欄に保存先の絶対パスを記入  
+   ![setting](readme_imgs/Unity_figure_RGB_all.png)
+4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
+   保存先のパスにRGB画像(.png)が生成される  
 
 
 #### 深度画像の生成  
-
-1. Project SettingからポストエフェクトにDepthExampleを指定  
-
-2. DepthSave.csにチェックして有効を確認  
-
-3. 保存先のパスを記入  
-
-4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
-
-   指定先のパスに深度画像データ(.exr)が保存される  
-
+1. Edit Tab>Project Setting>HDRP Default Settings>一番下のAfter Post Process>DepthExampleを指定
+   ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)
+   ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
+   
+3. Hierarchy Window>Capsule>Camera>を選択  
+4. DepthSave.csのチェックボックスを有効  
+5. DepthSave.cs>Save File Path の空欄に保存先の絶対パスを記入
+   ![setting](readme_imgs/Unity_Depth_all.png)  
+6. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
+   保存先のパスに深度画像データ(.exr)が生成される  
 
 ### 3. パターンの投影  
+1. Hierarchy Window>Capsule>Camera>を選択  
+2. RGBSave.csのチェックボックスを有効  
+3. RGBSave.cs>Patternのチェックボックスの有効で光源を起動  
+   ![setting](readme_imgs/Unity_figure_RGB_pattern_all.png)  
 
-1. RGBSave.csにチェックして有効を確認  
-   
-2. Patternのチェックボックスを有効  
 
-3. Camera PreViewで投影を確認  
+## その他
 
-##### パターン投影の詳細設定  
+### パターン投影の詳細設定  
 
 1. Hierarchy Window>Capsule>Camera>SpotLightを選択 
  
