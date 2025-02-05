@@ -18,14 +18,17 @@ RGB画像と深度データを生成するための機能追加
 ### 1. インストール
 #### レポジトリのクローン
 ```sh
-git clone https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy/our_project.git
-```
+https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git  
+```  
 
-### 2. 画像生成  
+#### プロジェクトの起動  
+VR-Caps-Unity>Assets>Scenes>Record_scene.unity 
+
+### 2. データ作成方法  
 
 #### RGB画像の生成  
 
-1. RGBSave.csにチェックして有効を確認  
+1. RGBSave.csのチェックボックスを有効  
 
 2. 保存先のパスを記入  
 
@@ -38,7 +41,7 @@ git clone https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy/our_projec
 
 1. Project SettingからポストエフェクトにDepthExampleを指定  
 
-2. DepthSave.csにチェックして有効を確認  
+2. DepthSave.csのチェックボックスを有効  
 
 3. 保存先のパスを記入  
 
@@ -46,16 +49,18 @@ git clone https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy/our_projec
 
    指定先のパスに深度画像データ(.exr)が保存される  
 
-
 ### 3. パターンの投影  
 
-1. RGBSave.csにチェックして有効を確認  
+1. RGBSave.csのチェックボックスを有効  
    
-2. Patternのチェックボックスを有効  
+2. Patternのチェックボックスの有効でパターンを起動  
 
 3. Camera PreViewで投影を確認  
 
-##### パターン投影の詳細設定  
+
+## その他
+
+### パターン投影の詳細設定  
 
 1. Hierarchy Window>Capsule>Camera>SpotLightを選択 
  
