@@ -27,27 +27,29 @@ VR-Caps-Unity>Assets>Scenes>Record_scene.unity
 ### 2. データ作成方法  
 
 #### RGB画像の生成  
+1. Hierarchy Window>Capsule>Camera>を選択  
+   
+2. RGBSave.csのチェックボックスを有効  
 
-1. RGBSave.csのチェックボックスを有効  
-
-2. 保存先のパスを記入  
-
-3. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
-
-   指定先のパスにRGB画像(.png)が保存される  
-
-
-#### 深度画像の生成  
-
-1. Project SettingからポストエフェクトにDepthExampleを指定  
-
-2. DepthSave.csのチェックボックスを有効  
-
-3. 保存先のパスを記入  
+3. RGBSave.cs>Save File Path の空欄に保存先の絶対パスを記入  
 
 4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
 
-   指定先のパスに深度画像データ(.exr)が保存される  
+   保存先のパスにRGB画像(.png)が生成される  
+
+
+#### 深度画像の生成  
+1. Edit Tab>Project Setting>HDRP Default Settings>一番下のAfter Post Process>DepthExampleを指定  
+
+2. Hierarchy Window>Capsule>Camera>を選択  
+
+3. DepthSave.csのチェックボックスを有効  
+
+4. DepthSave.cs>Save File Path の空欄に保存先の絶対パスを記入  
+
+5. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
+
+   保存先のパスに深度画像データ(.exr)が生成される  
 
 ### 3. パターンの投影  
 
