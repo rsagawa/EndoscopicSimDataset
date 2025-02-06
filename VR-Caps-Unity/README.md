@@ -3,7 +3,7 @@ RGB画像と深度データを生成するための機能追加
 
 
 ## 概要
-・VR-Capsの3Dモデルからカメラパスに沿ってRGB画像またはDepthデータの自動取得が可能
+・VR-Capsの3Dモデルからカメラパスに沿ってRGB画像またはDepth画像の自動取得が可能
 
 ・カメラパスの任意作成が可能  (デフォルトでは事前に作成したカメラパスを使用)  
 
@@ -28,10 +28,10 @@ VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動
 ### RGB画像の生成  
 1. Hierarchy Window > Capsule > Cameraを選択  
 2. RGBSave.csのチェックボックスを有効  
-3. RGBSave.cs > Save File Path の空欄に保存先の絶対パスを記入  
+3. RGBSave.cs > Save File Path に保存先の絶対パスを記入  
    ![setting](readme_imgs/Unity_figure_RGB_all.png)
 4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
-   保存先のパスにRGB画像(.png)が生成される
+   -> 保存先にRGB画像(.png)を生成
    
 ### 深度画像の生成  
 1. Edit Tab > Project Setting > HDRP Default Settings > After Post Process > DepthExampleを指定
@@ -39,10 +39,10 @@ VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動
    ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
 3. Hierarchy Window > Capsule > Cameraを選択  
 4. DepthSave.csのチェックボックスを有効  
-5. DepthSave.cs > Save File Path の空欄に保存先の絶対パスを記入
+5. DepthSave.cs > Save File Path に保存先の絶対パスを記入  
    ![setting](readme_imgs/Unity_Depth_all.png)  
 6. 実行ボタンを押すと自動でカメラパスに沿って撮影を開始  
-   保存先のパスに深度画像データ(.exr)が生成される  
+   -> 保存先に深度画像データ(.exr)を生成  
 
 ### パターンの投影  
 1. Hierarchy Window > Capsule > Cameraを選択  
@@ -84,7 +84,8 @@ pip install matplotlib
 
 3. コピーしたパスをVR-Caps-Unity/Assets/test_exr.py内のfilename変数に指定  
 
-4. コマンドプロンプト等でtest_exr.pyを実行
+4. コマンドプロンプト等でtest_exr.pyを実行  
+![fig](readme_imgs/test_exr.png)
 
 ### カメラパスの作成方法  
 1. Hierarchy Window > Capsule > Cameraを選択  
@@ -93,7 +94,7 @@ pip install matplotlib
 
 3. RGBSave.csとDepthSave.csのチェックボックスを無効  
 
-4. CameraPathSave.cs > Save File Path の空欄に保存先の絶対パスを記入  
+4. CameraPathSave.cs > Save File Path に保存先の絶対パスを記入  
 
 5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
 
@@ -101,10 +102,16 @@ pip install matplotlib
    ・Q : 上昇, E : 下降  
    ・マウスのドラッグ : 任意回転  
 
-6. 移動終了後、スペースキー押下でカメラパスを生成  
+6. スペースキー押下でカメラパスの記録開始
+7. 再度スペースキー押下でカメラパスの記録終了  
+   -> 保存先にcsvファイルを生成  
 
+### 作成したカメラパスの指定方法  
+1. Hierarchy Window > Capsule > Cameraを選択  
 
+2. RGBSave.cs > Load Camera Path にcsvファイルのパスを指定  
 
+&nbsp;&nbsp;&nbsp;&nbsp;(デプス画像の生成も上記と同じ)  
 
 
 
