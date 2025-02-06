@@ -85,7 +85,7 @@ pip install matplotlib
 3. コピーしたパスをVR-Caps-Unity/Assets/test_exr.py内のfilename変数に指定  
 
 4. コマンドプロンプト等でtest_exr.pyを実行  
-![fig](readme_imgs/test_exr.png)
+![fig](readme_imgs/text_exr.png)
 
 ### カメラパスの作成方法  
 1. Hierarchy Window > Capsule > Cameraを選択  
