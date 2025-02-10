@@ -355,7 +355,7 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
         }
         else
         {
-            UnityEngine.Debug.Log("Please Set Save Directory.");
+            UnityEngine.Debug.Log("Please Set Corrected Save Directory.");
             yield break;
         }
 
