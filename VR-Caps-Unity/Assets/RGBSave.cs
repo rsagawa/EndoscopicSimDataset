@@ -16,8 +16,8 @@ using System.Diagnostics;
 public class RGBSave : MonoBehaviour, IPostProcessComponent
 {
 #if UNITY_EDITOR
-    [SerializeField] private string Save_RGB_DIR = "";
-    [SerializeField] private string Load_Camera_Path = "";
+    [SerializeField] private string Save_Folder_Path = "";
+    [SerializeField] private string Load_Camera_Pose_Path = "";
     [SerializeField] private bool Pattern = false;
 #endif
 
@@ -213,7 +213,7 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
         //UnityEngine.Debug.Log("Capture End.");
     }
 
-    IEnumerator original_unit_proc(string input_csv_path, string save_rgb_dir)
+    IEnumerator original_unit_proc(string input_csv_path, string Save_Folder_Path)
     {
         List<List<string>> poses = load_csv_original(input_csv_path);
 
@@ -221,18 +221,18 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
 
         string filename = Path.GetFileNameWithoutExtension(input_csv_path);
 
-        string save_dir = save_rgb_dir + "/" + filename + "_RGB" + "/";
+        string save_dir = Save_Folder_Path + "/" + filename + "_RGB" + "/";
 
         Directory.CreateDirectory(save_dir);
 
         yield return capture(poses, save_dir, filename);
     }
 
-    IEnumerator default_unit_proc(string filename, string save_rgb_dir)
+    IEnumerator default_unit_proc(string filename, string Save_Folder_Path)
     {
         List<List<string>> poses = load_csv_default(filename);
 
-        string save_dir = save_rgb_dir + "/" + filename + "_RGB" + "/";
+        string save_dir = Save_Folder_Path + "/" + filename + "_RGB" + "/";
 
         Directory.CreateDirectory(save_dir);
 
@@ -241,36 +241,36 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
         yield return capture(poses, save_dir, filename);
     }
 
-    IEnumerator original_process(string input_csv_path, string save_rgb_dir)
+    IEnumerator original_process(string input_csv_path, string Save_Folder_Path)
     {
         //UnityEngine.Debug.Log("process start: " + input_csv_path);
-        yield return original_unit_proc(input_csv_path, save_rgb_dir);
+        yield return original_unit_proc(input_csv_path, Save_Folder_Path);
         //UnityEngine.Debug.Log("process end: " + input_csv_path);
     }
 
-    IEnumerator default_process(string save_rgb_dir)
+    IEnumerator default_process(string Save_Folder_Path)
     {
         foreach (string filename in filenames)
         {
             //UnityEngine.Debug.Log("process start: " + filename);
-            yield return default_unit_proc(filename, save_rgb_dir);
+            yield return default_unit_proc(filename, Save_Folder_Path);
             //UnityEngine.Debug.Log("process end: " + filename);
         }
     }
 
     IEnumerator Record()
     {
-        if (!Directory.Exists(Save_RGB_DIR))
+        if (!Directory.Exists(Save_Folder_Path))
         {
             UnityEngine.Debug.Log("Please Set Corrected Save Directory.");
             yield break;
         }
 
-        if (!string.IsNullOrEmpty(Load_Camera_Path))
+        if (!string.IsNullOrEmpty(Load_Camera_Pose_Path))
         {
-            if (File.Exists(Load_Camera_Path))
+            if (File.Exists(Load_Camera_Pose_Path))
             {
-                yield return original_process(Load_Camera_Path, Save_RGB_DIR);
+                yield return original_process(Load_Camera_Pose_Path, Save_Folder_Path);
             }
             else
             {
@@ -280,7 +280,7 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
         }
         else
         {
-            yield return default_process(Save_RGB_DIR);
+            yield return default_process(Save_Folder_Path);
         }
     }
 
