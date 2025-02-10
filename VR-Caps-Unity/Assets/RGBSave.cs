@@ -190,7 +190,7 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
 
     IEnumerator capture(List<List<string>> poses, string save_dir, string filename)
     {
-        UnityEngine.Debug.Log("Capture Start.");
+        //UnityEngine.Debug.Log("Capture Start.");
 
         for (int i = 0; i < poses.Count; i++)
         {
@@ -202,7 +202,7 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
             this.transform.position = pos;
             transform.localRotation = rot;
 
-            UnityEngine.Debug.Log(poses[i][0] +" "+ poses[i][1] + " " + poses[i][2]);
+            //UnityEngine.Debug.Log(poses[i][0] +" "+ poses[i][1] + " " + poses[i][2]);
 
             string outputFile = filename + "_" + i.ToString("D5");
             string save_rgb_path = save_dir + "/" + outputFile + ".png";
@@ -210,7 +210,7 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
             save_rgb(save_rgb_path);
         }
 
-        UnityEngine.Debug.Log("Capture End.");
+        //UnityEngine.Debug.Log("Capture End.");
     }
 
     IEnumerator original_unit_proc(string input_csv_path, string save_rgb_dir)
@@ -243,28 +243,24 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
 
     IEnumerator original_process(string input_csv_path, string save_rgb_dir)
     {
-        UnityEngine.Debug.Log("process start: " + input_csv_path);
+        //UnityEngine.Debug.Log("process start: " + input_csv_path);
         yield return original_unit_proc(input_csv_path, save_rgb_dir);
-        UnityEngine.Debug.Log("process end: " + input_csv_path);
+        //UnityEngine.Debug.Log("process end: " + input_csv_path);
     }
 
     IEnumerator default_process(string save_rgb_dir)
     {
         foreach (string filename in filenames)
         {
-            UnityEngine.Debug.Log("process start: " + filename);
+            //UnityEngine.Debug.Log("process start: " + filename);
             yield return default_unit_proc(filename, save_rgb_dir);
-            UnityEngine.Debug.Log("process end: " + filename);
+            //UnityEngine.Debug.Log("process end: " + filename);
         }
     }
 
     IEnumerator Record()
     {
-        if (Directory.Exists(Save_RGB_DIR))
-        {
-            UnityEngine.Debug.Log("Detect Save Directory.");
-        }
-        else
+        if (!Directory.Exists(Save_RGB_DIR))
         {
             UnityEngine.Debug.Log("Please Set Corrected Save Directory.");
             yield break;
