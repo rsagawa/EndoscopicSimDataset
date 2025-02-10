@@ -44,30 +44,8 @@ VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動
 6. 実行ボタンを押すと自動でカメラパスに沿って撮影を開始  
    -> 保存先に深度画像データ(.exr)を生成  
 
-### パターンの投影  
-1. Hierarchy Window > Capsule > Cameraを選択  
-2. RGBSave.csのチェックボックスを有効  
-3. RGBSave.cs > Patternのチェックボックスの有効で光源を起動  
-   ![setting](readme_imgs/Unity_figure_RGB_pattern_all.png)  
-
 
 ## その他
-
-### パターン投影の詳細設定  
-
-1. Hierarchy Window > Capsule > Camera > SpotLightを選択 
- 
-2. Inspector Window > Light > General > ModeでBakedを指定  
-
-3. Inspector Window > Light > Shape > Coneを指定  
-
-4. Radiusで光源のサイズ調整  
-
-5. Inspector Window > Light > Emission > Colorで色指定  
-
-6. Inspector Window > Light > Emission > CookieでAssetsの中のパターン画像を指定  
-
-
 ### 深度データの確認方法  
 
 1. 下記モジュールをインストール  
@@ -94,7 +72,7 @@ pip install matplotlib
 
 3. RGBSave.csとDepthSave.csのチェックボックスを無効  
 
-4. CameraPathSave.cs > Save File Path に保存先の絶対パスを記入  
+4. CameraPathSave.cs > Save Path に保存先の絶対パスを記入  
 
 5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
 
