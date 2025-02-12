@@ -91,6 +91,19 @@ pip install matplotlib
 
 &nbsp;&nbsp;&nbsp;&nbsp;(デプス画像の生成も上記と同じ)  
 
+## Reference
+
+```
+@misc{incetan2020vrcaps,
+      title={VR-Caps: A Virtual Environment for Capsule Endoscopy}, 
+      author={Kagan Incetan and Ibrahim Omer Celik and Abdulhamid Obeid and Guliz Irem Gokceler and Kutsev Bengisu Ozyoruk and Yasin Almalioglu and Richard J. Chen and Faisal Mahmood and Hunter Gilbert and Nicholas J. Durr and Mehmet Turan},
+      year={2020},
+      eprint={2008.12949},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
 
 
 
