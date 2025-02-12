@@ -50,7 +50,7 @@ public class CameraMover : MonoBehaviour
 
         _camTransform = this.transform;
 
-        Debug.Log("Start");
+        //Debug.Log("Start");
 
 
         float tX = transform.position.x;

@@ -16,14 +16,12 @@ using System.Diagnostics;
 public class RGBSave : MonoBehaviour, IPostProcessComponent
 {
 #if UNITY_EDITOR
-    [SerializeField] private string SaveFilePath = "";    //Unityエディタ上で保存パスを指定
+    [SerializeField] private string Save_Folder_Path = "";
+    [SerializeField] private string Load_Camera_Pose_Path = "";
     [SerializeField] private bool Pattern = false;
 #endif
 
     public ClampedFloatParameter depthDistance = new ClampedFloatParameter(1f, 0f, 32f);
-
-    // private List<List<string>> csvDatas = new List<List<string>>();
-    // private List<List<string>> csvDatas3 = new List<List<string>>();
 
     List<string> filenames = new List<string>
     {
@@ -58,12 +56,10 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
 
     public void SwitchSpotLight()
     {
-        GameObject parentObject = this.gameObject;   //GameObject.Find("Capsule");
-        //parentObject = GameObject.Find(SpotLightPath);
+        GameObject parentObject = this.gameObject;
 
         if (parentObject != null)
         {
-            // 階層全体のパスを使ってオブジェクトを探す
             Transform TurnOnObjectTransform = parentObject.transform.Find("SpotLight");
             Transform TurnOffObjectTransform = parentObject.transform.Find("SpotLightpattern");
 
@@ -72,7 +68,6 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
                 GameObject TurnOnObject = TurnOnObjectTransform.gameObject;
                 GameObject TurnOffObject = TurnOffObjectTransform.gameObject;
 
-                // スポットライトの有効/無効を切り替える
                 TurnOnObject.SetActive(!Pattern);
                 TurnOffObject.SetActive(Pattern);
             }
@@ -91,7 +86,6 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
                 }
                 catch (FileNotFoundException ex)
                 {
-                    // オブジェクトが見つからない場合の処理
                     UnityEngine.Debug.Log("Target Light objects not found");
                 }
             }
@@ -108,165 +102,185 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
             m_Material = new Material(Shader.Find("Hidden/Shader/DepthShader"));
     }
 
-
-    IEnumerator ReadCSV()
+    TextAsset load_csv(string input_path)
     {
-        UnityEngine.Debug.Log("inCSV");
+        string fileContent = File.ReadAllText(input_path);
+        TextAsset csvFile = new TextAsset(fileContent);
 
-        //////////////////////////////
-        Vector3 posi = this.transform.position;
-        Vector3 posi3 = this.transform.position;
-        //////////////////////////////
+        UnityEngine.Debug.Log("Loaded original camera path");
 
-        //ここでファイル名を必要に応じて変える
-        //Resourcesフォルダを作って読み込むcsvデータを入れておく, .csvの前までの名前を入れる
-        //TextAsset csvFile = Resources.Load("shudo1_csv") as TextAsset;
-        // TextAsset csvFile = Resources.Load("stop") as TextAsset;
-        // TextAsset csvFile = Resources.Load("depth_calib") as TextAsset;
+        return csvFile;
+    }
 
+    List<List<string>> load_csv_original(string input_csv_path)
+    {
+        string fileContent = File.ReadAllText(input_csv_path);
+        TextAsset csv_str = new TextAsset(fileContent);
+
+        StringReader reader = new StringReader(csv_str.text);
+
+        List<List<string>> poses = new List<List<string>>();
+
+        bool isFirstLine = true;
+
+        while (reader.Peek() != -1)
+        {
+            if (isFirstLine)
+            {
+                isFirstLine = false;
+                reader.ReadLine();    //skip first line.
+                continue;
+            }
+
+            string line = reader.ReadLine();
+            List<string> list = new List<string>();
+            list = line.Split(',').ToList();
+
+            poses.Add(list);
+
+        }
+        reader.Close();
+
+        UnityEngine.Debug.Log("Loaded original camera path");
+        UnityEngine.Debug.Log("Loaded path len: " + poses.Count);
+
+        return poses;
+    }
+
+    List<List<string>> load_csv_default(string filename)
+    {
+
+        TextAsset csv_str = Resources.Load(filename) as TextAsset;
+
+        StringReader reader = new StringReader(csv_str.text);
+
+        List<List<string>> poses = new List<List<string>>();
+
+        bool isFirstLine = true;
+
+        while (reader.Peek() != -1)
+        {
+            if (isFirstLine)
+            {
+                isFirstLine = false;
+                reader.ReadLine();    //skip first line.
+                continue;
+            }
+
+            string line = reader.ReadLine();
+            List<string> list = new List<string>();
+            list = line.Split(',').ToList();
+
+            poses.Add(list);
+
+        }
+        reader.Close();
+
+        UnityEngine.Debug.Log("Loaded default camera path");
+        UnityEngine.Debug.Log("Loaded path len: " + poses.Count);
+
+        return poses;
+    }
+
+    void save_rgb(string path)
+    {
+        ScreenCapture.CaptureScreenshot(path);
+        UnityEngine.Debug.Log("Saved: " + path);
+    }
+
+    IEnumerator capture(List<List<string>> poses, string save_dir, string filename)
+    {
+        //UnityEngine.Debug.Log("Capture Start.");
+
+        for (int i = 0; i < poses.Count; i++)
+        {
+            yield return null;
+
+            Vector3 pos = new Vector3(float.Parse(poses[i][0]), float.Parse(poses[i][1]), float.Parse(poses[i][2]));
+            Quaternion rot = new Quaternion(float.Parse(poses[i][10]), float.Parse(poses[i][11]), float.Parse(poses[i][12]), float.Parse(poses[i][13]));
+
+            this.transform.position = pos;
+            transform.localRotation = rot;
+
+            //UnityEngine.Debug.Log(poses[i][0] +" "+ poses[i][1] + " " + poses[i][2]);
+
+            string outputFile = filename + "_" + i.ToString("D5");
+            string save_rgb_path = save_dir + "/" + outputFile + ".png";
+
+            save_rgb(save_rgb_path);
+        }
+
+        //UnityEngine.Debug.Log("Capture End.");
+    }
+
+    IEnumerator original_unit_proc(string input_csv_path, string Save_Folder_Path)
+    {
+        List<List<string>> poses = load_csv_original(input_csv_path);
+
+        //var wait = new WaitForSeconds((float)0.1);
+
+        string filename = Path.GetFileNameWithoutExtension(input_csv_path);
+
+        string save_dir = Save_Folder_Path + "/" + filename + "_RGB" + "/";
+
+        Directory.CreateDirectory(save_dir);
+
+        yield return capture(poses, save_dir, filename);
+    }
+
+    IEnumerator default_unit_proc(string filename, string Save_Folder_Path)
+    {
+        List<List<string>> poses = load_csv_default(filename);
+
+        string save_dir = Save_Folder_Path + "/" + filename + "_RGB" + "/";
+
+        Directory.CreateDirectory(save_dir);
+
+        //var wait = new WaitForSeconds((float)0.1);
+
+        yield return capture(poses, save_dir, filename);
+    }
+
+    IEnumerator original_process(string input_csv_path, string Save_Folder_Path)
+    {
+        //UnityEngine.Debug.Log("process start: " + input_csv_path);
+        yield return original_unit_proc(input_csv_path, Save_Folder_Path);
+        //UnityEngine.Debug.Log("process end: " + input_csv_path);
+    }
+
+    IEnumerator default_process(string Save_Folder_Path)
+    {
         foreach (string filename in filenames)
         {
+            //UnityEngine.Debug.Log("process start: " + filename);
+            yield return default_unit_proc(filename, Save_Folder_Path);
+            //UnityEngine.Debug.Log("process end: " + filename);
+        }
+    }
 
-            TextAsset csvFile = Resources.Load(filename) as TextAsset;
+    IEnumerator Record()
+    {
+        if (!Directory.Exists(Save_Folder_Path))
+        {
+            UnityEngine.Debug.Log("Please Set Corrected Save Directory.");
+            yield break;
+        }
 
-            //保存先指定
-            //string path = "C:\\Users\\juranmar7993\\github\\pushtest\\V2\\VR-Caps-Unity\\Assets\\ScreenShot_PNG";
-            //        string path = "C:\\Users\\juranmar7993\\Desktop\\VirtualCapsuleEndoscopy\\VR-Caps-Unity\\Assets\\ScreenShot_PNG\\";
-            //string path = "C:\\Users\\rsagawa41766\\Documents\\src\\20230407_VR-Caps\\test";
-            string path = SaveFilePath; // "D:\\torii\\projects\\VRcaps画像列抽出Unity\\data\\demo";
-
-            path = path + "\\" + filename + "_RGB\\";
-            //path = path + "\\" + filename + "_RGB_pat\\";
-
-            Directory.CreateDirectory(path);
-
-            StringReader reader = new StringReader(csvFile.text);//【読み込んでreaderとする】
-            StringReader reader2 = new StringReader(csvFile.text);//【読み込んでreader2とする】
-            StringReader reader3 = new StringReader(csvFile.text);//【読み込んでreader3とする】
-
-            List<List<string>> csvDatas = new List<List<string>>();
-            List<List<string>> csvDatas3 = new List<List<string>>();
-
-            int count = 0;
-            int counts = 0;
-
-            var wait = new WaitForSeconds((float)0.1);
-
-            while (reader2.Peek() != -1)
+        if (!string.IsNullOrEmpty(Load_Camera_Pose_Path))
+        {
+            if (File.Exists(Load_Camera_Pose_Path))
             {
-                string line2 = reader2.ReadLine();//【一行ごとに読み込み(line2:string型)】///////////////////////////////////////////////
-                count++;
+                yield return original_process(Load_Camera_Pose_Path, Save_Folder_Path);
             }
-            // reader2.Close();
-
-
-            UnityEngine.Debug.Log(count);//csvの行数カウント
-
-            string line3 = reader3.ReadLine();//１行読み飛ばす
-            while (reader3.Peek() != -1)
+            else
             {
-                line3 = reader3.ReadLine();
-                List<string> list3 = new List<string>();//【リストの定義】////////////////////////////////////////////
-
-                list3 = line3.Split(',').ToList();//【分割してリスト化】//////////////////////////////////////////////
-
-                csvDatas3.Add(list3);
-
+                UnityEngine.Debug.Log("Faild load camera-path-file. Please Set corrected path.");
+                yield break;
             }
-            // reader3.Close();
-
-
-            posi3 = new Vector3(float.Parse(csvDatas3[1][0]), float.Parse(csvDatas3[1][1]), float.Parse(csvDatas3[1][2]));
-
-            //////////////////////////////
-            this.transform.position = posi3;
-
-            transform.rotation = new Quaternion(float.Parse(csvDatas3[1][3]), float.Parse(csvDatas3[1][4]), float.Parse(csvDatas3[1][5]), float.Parse(csvDatas3[1][6]));
-            //Quaternion r3 = Quaternion.Euler(0, 180, 0);
-
-            //this.transform.rotation = transform.rotation * r3;
-            //////////////////////////////
-
-
-
-            string line = reader.ReadLine();//１行読み飛ばす
-
-            for (int i = 0; i < count - 1; i++)//
-            {
-                // Debug.Log(i);
-                // yield return wait;
-                yield return null;
-                line = reader.ReadLine();//【一行ごとに読み込み(line:string型)】////////////////////////////////////
-
-                List<string> list = new List<string>();/////////【リストの定義】////////////////////////////////////
-
-                list = line.Split(',').ToList();//【分割してリスト化】//////////////////////////////////////////////
-
-                csvDatas.Add(list);
-
-                posi = new Vector3(float.Parse(csvDatas[i][0]), float.Parse(csvDatas[i][1]), float.Parse(csvDatas[i][2]));
-                //posi = new Vector3(float.Parse(csvDatas[i][3]), float.Parse(csvDatas[i][4]), float.Parse(csvDatas[i][5]));
-
-                //////////////////////////////
-                this.transform.position = posi;
-                //transform.rotation = new Quaternion(float.Parse(csvDatas[i][3]), float.Parse(csvDatas[i][4]), float.Parse(csvDatas[i][5]), float.Parse(csvDatas[i][6]));
-                transform.localRotation = new Quaternion(float.Parse(csvDatas[i][10]), float.Parse(csvDatas[i][11]), float.Parse(csvDatas[i][12]), float.Parse(csvDatas[i][13]));
-                //this.transform.rotation = transform.rotation * r3;
-                //////////////////////////////
-
-
-                //ファイル名を変更する
-                string outputFile = filename + "_" + counts.ToString("00000");
-
-
-                //RGB画像(.png)保存
-                ScreenCapture.CaptureScreenshot(path + outputFile + ".png");
-
-
-
-                // var mainCamObj = GameObject.FindGameObjectWithTag("Player");
-                // var cam = mainCamObj.GetComponent<Camera>();
-                // RenderTexture rTex = cam.targetTexture;
-
-                // Texture2D tex = new Texture2D(320, 320, TextureFormat.RGBAFloat, false);///////////////////////////////////////////
-                // //RenderTexture.active = rTex;
-                // //tex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
-                // //tex.Apply();
-
-                // byte[] bytes = tex.EncodeToEXR(Texture2D.EXRFlags.OutputAsFloat);
-                // //GameObject.Destroy(tex);
-
-
-
-                // ////深度画像(.exr)保存
-                // //File.WriteAllBytes(path + "/EXR" + outputFile + ".exr", bytes);
-
-                // float tX = transform.position.x;
-                // float tY = transform.position.y;
-                // float tZ = transform.position.z;
-
-                // float ltX = transform.localPosition.x;
-                // float ltY = transform.localPosition.y;
-                // float ltZ = transform.localPosition.z;
-
-                // float rX = this.transform.rotation.x;
-                // float rY = this.transform.rotation.y;
-                // float rZ = this.transform.rotation.z;
-                // float rW = this.transform.rotation.w;
-
-                //Debug.Log("saveEXRの回数  " + counts + " :    " + tX + "  ,  " + tY + "  ,  " + tZ);
-
-                counts++;
-
-                ////Debug.Log(i+ "   経過時間:     " + ts.TotalMilliseconds + "    :NewBehavior読み込み  " + float.Parse(csvDatas[i][0]));
-                //Debug.Log("csv読み込み    　" + i + " :    " + float.Parse(csvDatas[i][0]) + "  ,  " + float.Parse(csvDatas[i][1]) + "  ,  " + float.Parse(csvDatas[i][2]));
-                //Debug.Log("csv読み込み    　" + i + " :    " + tX + "  ,  " + tY + "  ,  " + tZ + "  ,  " + rX + "  ,  " + rY + "  ,  " + rZ + "  ,  " + rW);
-
-            }
-
-            // reader.Close();
-
-            UnityEngine.Debug.Log("End");/////////////////////////////////////////////////////////////////////
+        }
+        else
+        {
+            yield return default_process(Save_Folder_Path);
         }
     }
 
@@ -274,8 +288,7 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
     {
         SwitchSpotLight();
 
-        StartCoroutine("ReadCSV");
-        // ReadCSV0();
+        StartCoroutine(Record());
     }
 
     public void Cleanup() => CoreUtils.Destroy(m_Material);
@@ -292,11 +305,6 @@ public class RGBSaveWindow : Editor
 
         var setter = target as RGBSave;
 
-
-        //if (!EditorApplication.isPlaying && GUILayout.Button("Reload Spot Light Pattern"))
-        //{
-        //    setter.SwitchSpotLight();
-        //}
         if (!EditorApplication.isPlaying)
         {
             setter.SwitchSpotLight();

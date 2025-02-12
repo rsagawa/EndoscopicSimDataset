@@ -5,16 +5,24 @@ using System.Text;
 using System.IO;
 using System;
 using System.Threading;
+using System.Diagnostics;
 
 //カメラパスの保存
 
 public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPlay中に起動する
 {
-    StreamWriter sw;
+
+#if UNITY_EDITOR
+    [SerializeField] private string Save_Path = "";
+#endif
+
+    private bool isRecording = false;
+
+    private List<string> poses = new List<string>();
+
+    //StreamWriter sw;
 
     //private float count = 0;
-
-
 
     //カメラの移動量
     [SerializeField, Range(0.01f, 100.0f)]
@@ -60,49 +68,89 @@ public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPla
 
     void Start()
     {
-//csvが生成される
-sw = new StreamWriter(@"shudo1_csv.csv", false, Encoding.GetEncoding("Shift_JIS"));//VR-Caps-Unityのこれに保存される。
-
-        // CSVのヘッダー部分
-        string[] s1 = { "Pos_X", "Pos_Y", "Pos_Z", "localPos_X", "localPos_Y", "localPos_Z", "Rot_X", "Rot_Y", "Rot_Z", "Rot_W", "localRot_X", "localRot_Y", "localRot_Z", "localRot_W", "count" };
-        string s2 = string.Join(",", s1);
-        sw.WriteLine(s2);
-
-
-        StartCoroutine("WriteCSV");
+        //StartCoroutine("WriteCSV");
+        StartCoroutine("Capture");
     }
 
+    IEnumerator Capture()
+    {
+        while (true)
+        {
+            yield return null;
 
+            if (Input.GetKey(KeyCode.Space))
+            {
+                //UnityEngine.Debug.Log("Capture Space.");
+                var wait = new WaitForSeconds((float)0.5);
+                isRecording = true;
+                yield return wait;
+                yield return Record();
+                UnityEngine.Debug.Log($"<color=red>{"●Recording Stop."}</color>");
+                var wait2 = new WaitForSeconds((float)0.5);
+                yield return wait2;
+            }
 
-    IEnumerator WriteCSV()
+            //if (Input.GetKey(KeyCode.N))
+            //{
+            //    string write_path = Save_Path;
+
+                //    string Save_CSV_DIR = Path.GetDirectoryName(write_path);
+
+                //    if (!Directory.Exists(Save_CSV_DIR))
+                //    {
+                //        UnityEngine.Debug.Log("Cant Find Save CSV Path.");
+                //        yield break;
+                //    }
+
+                //    yield return write_csv(poses, write_path);
+
+                //    isRecording = false;
+
+                //    var wait2 = new WaitForSeconds((float)0.5);
+                //    yield return wait2;
+                //}
+        }
+    }
+
+    IEnumerator write_csv(List<string> poses, string path)
     {
 
-        TextAsset csvFile = Resources.Load("shudo1_csv") as TextAsset;////Resourcesフォルダにcsvを入れておく
+        UnityEngine.Debug.Log("Saved: " + path);
 
-        StringReader reader = new StringReader(csvFile.text);//【読み込んでreaderとする】
+        StreamWriter sw = new StreamWriter(path, false, Encoding.GetEncoding("Shift_JIS"));
+
+        string[] s1 = { "Pos_X", "Pos_Y", "Pos_Z", "localPos_X", "localPos_Y", "localPos_Z", "Rot_X", "Rot_Y", "Rot_Z", "Rot_W", "localRot_X", "localRot_Y", "localRot_Z", "localRot_W", "count" };
+        string s2 = string.Join(",", s1);
+
+        sw.WriteLine(s2);
+
+        for (int i = 0; i < poses.Count; i++)
+        {
+            sw.WriteLine(poses[i]);
+        }
+
+        sw.Close();
+
+        //UnityEngine.Debug.Log("Writing done.");
+
+        yield return null;
+    }
+
+    IEnumerator Record()
+    {
+        UnityEngine.Debug.Log($"<color=red>{"●Recording start."}</color>");
+
+        var wait = new WaitForSeconds((float)0.1);
 
 
-
-        var wait = new WaitForSeconds((float)0.1);////////////////////////()の中の秒数ごとに書かれる
-
-
-        while (true)
+        while (isRecording)
         {
 
             yield return wait;
 
-
             _camTransform = this.transform;
 
-
-
             Vector3 campos = _camTransform.localPosition;
-            //campos = transform.InverseTransformPoint(campos);///////////////
-
-            //　方向ベクトルをワールド→ローカルへと変える transform.InverseTransformDirection(Vector3の値);
-            //　位置をワールド→ローカルへと変える transform.InverseTransformPoint(Vector3の値);
-
-            //Quaternion q = Quaternion.Inverse(_camTransform.localRotation);//
 
             float pX = transform.position.x;
             float pY = transform.position.y;
@@ -136,119 +184,99 @@ sw = new StreamWriter(@"shudo1_csv.csv", false, Encoding.GetEncoding("Shift_JIS"
             string[] str = { (pX).ToString(), (pY).ToString(), (pZ).ToString(), (lpX).ToString(), (lpY).ToString(), (lpZ).ToString(), (rX).ToString(), (rY).ToString(), (rZ).ToString(), (rW).ToString(), (lrX).ToString(), (lrY).ToString(), (lrZ).ToString(), (lrW).ToString() };
             string str2 = string.Join(",", str);
 
-            sw.WriteLine(str2);
+            poses.Add(str2);
 
-
-            if (Input.GetKeyDown(KeyCode.D))//押した瞬間
+            if (Input.GetKeyDown(KeyCode.D))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
-            if (Input.GetKeyUp(KeyCode.D))//キーを離した瞬間
+            if (Input.GetKeyUp(KeyCode.D))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyUp(KeyCode.A))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyUp(KeyCode.E))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyUp(KeyCode.Q))
             {
-
-                sw.WriteLine(str2);
-
+                poses.Add(str2);
             }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
-
-                sw.WriteLine(str2);
-
-            }//
+                poses.Add(str2);
+            }
 
             if (Input.GetKeyUp(KeyCode.W))
             {
-
-                sw.WriteLine(str2);
-
-            }//
+                poses.Add(str2);
+            }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-
-                sw.WriteLine(str2);
-
-            }//
+                poses.Add(str2);
+            }
 
             if (Input.GetKeyUp(KeyCode.S))
             {
-
-                sw.WriteLine(str2);
-
-            }//
+                poses.Add(str2);
+            }
 
             _camTransform.localPosition = campos;
 
+            //if (Input.GetKey(KeyCode.Space))
+            //{
+            //    isRecording = false;
 
+            //    var wait2 = new WaitForSeconds((float)0.5);
+            //    yield return wait2;
+            //}
 
-
-
+            //if (Input.GetKey(KeyCode.N))
             if (Input.GetKey(KeyCode.Space))
-            {
-                sw.Close();
-//swと同じファイル名前にする
-StreamReader sr = new StreamReader(@"shudo1_csv.csv", Encoding.GetEncoding("Shift_JIS"));
-
-
-
-                string line;
-                while ((line = sr.ReadLine()) != null)
                 {
-                    //Debug.Log(line);
+                string write_path = Save_Path;
+
+                string Save_CSV_DIR = Path.GetDirectoryName(write_path);
+
+                if (!Directory.Exists(Save_CSV_DIR))
+                {
+                    UnityEngine.Debug.Log($"<color=red>{"Can't find path to save csv file."}</color>");
+                    yield break;
                 }
-                sr.Close();
 
+                yield return write_csv(poses, write_path);
 
-                Debug.Log("書き込み完了");
-                break;
+                isRecording = false;
+
+                var wait2 = new WaitForSeconds((float)0.5);
+                yield return wait2;
             }
-        }
-    }//WriteCSV終わり
 
+        }
+    }
 }

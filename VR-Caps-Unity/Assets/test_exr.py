@@ -5,10 +5,8 @@ import array
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 
+filename = ''
 
-##filename = 'VR-Caps-Unity/Assets/SavedScreen.exr'
-filename = 'C:\\Users\\juranmar7993\\Desktop\\VirtualCapsuleEndoscopy\\VR-Caps-Unity\\Assets\\ScreenShot_EXR\\EXR20230308_colon2_00000.exr'
-#filename ='C:\\Users\\juranmar7993\\github\\pushtest\\VirtualCapsuleEndoscopy\\VR-Caps-Unity\\Assets\\ss0.exr'
 img_exr = OpenEXR.InputFile(filename)
 
 # Compute the size
