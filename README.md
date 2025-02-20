@@ -1,8 +1,8 @@
 Adding Functionality to Generate RGB Images and Depth Data
 =====
 
-
 ## Overview
+
 &nbsp;&nbsp;This repository provides an interface for generating simulation image data of the gastrointestinal tract based on VR-Caps.
 Image generation consists of the following two steps:
 
@@ -10,24 +10,30 @@ Image generation consists of the following two steps:
 - Generating RGB or Depth images along the camera path
 
 ## Development Environment
-・Unity version: 2019.3.3f1  
-・Unity Hub  
-・Anaconda  
-・Python 3.10  
+
+- Unity version: 2019.3.3f1  
+- Unity Hub  
+- Anaconda  
+- Python 3.10  
 
 ## Getting Started
 
 ### 1. Installation
+
 #### Clone the repository
+
 ```sh
 
 ```  
 
 ### 2. Launch the project  
+
 Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity
 
 ## Data Creation Method  
+
 ### Generating RGB Images  
+
 1. Select Hierarchy Window > Capsule > Camera  
 2. Enable the checkbox for RGBSave.cs  
 3. Enter the absolute path of the save destination in RGBSave.cs > Save Folder Path  
@@ -36,6 +42,7 @@ Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity
    -> Generate RGB images (.png) at the save destination
    
 ### Generating Depth Images  
+
 1. Select Edit Tab > Project Setting > HDRP Default Settings > After Post Process > DepthExample
    ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)
    ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
@@ -47,12 +54,43 @@ Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity
    -> Generate depth image data (.exr) at the save destination  
 
 ## Download
+
 The data we generated can be downloaded from the following
 ```sh
 
 ```  
 
 ## Others
+
+### How to Create Camera Paths  
+
+1. Select Hierarchy Window > Capsule > Camera  
+
+2. Enable the checkboxes for CameraPathSave.cs and CameraMover.cs  
+
+3. Disable the checkboxes for RGBSave.cs and DepthSave.cs  
+
+4. Enter the absolute path of the save destination in CameraPathSave.cs > Save Path  
+
+5. Press the play button to enable camera movement using mouse and key operations  
+
+   - W: Forward, S: Backward, A: Left, D: Right  
+   - Q: Up, E: Down  
+   - Mouse drag: Arbitrary rotation
+
+6. Press the space key to start recording the camera path
+
+7. Press the space key again to stop recording the camera path  
+   -> Generate a csv file at the save destination
+   
+### How to Specify the Created Camera Path  
+
+1. Select Hierarchy Window > Capsule > Camera  
+
+2. Specify the path of the csv file in RGBSave.cs > Load Camera Pose Path  
+
+&nbsp;&nbsp;&nbsp;&nbsp;(The same applies to generating depth images)
+
 ### How to Check Depth Data  
 
 1. Install the following modules  
@@ -71,32 +109,6 @@ pip install matplotlib
 
 4. Run test_exr.py in the command prompt, etc.  
 ![fig](readme_imgs/text_exr.png)
-
-### How to Create Camera Paths  
-1. Select Hierarchy Window > Capsule > Camera  
-
-2. Enable the checkboxes for CameraPathSave.cs and CameraMover.cs  
-
-3. Disable the checkboxes for RGBSave.cs and DepthSave.cs  
-
-4. Enter the absolute path of the save destination in CameraPathSave.cs > Save Path  
-
-5. Press the play button to enable camera movement using mouse and key operations  
-
-   - W: Forward, S: Backward, A: Left, D: Right  
-   - Q: Up, E: Down  
-   - Mouse drag: Arbitrary rotation
-
-6. Press the space key to start recording the camera path
-7. Press the space key again to stop recording the camera path  
-   -> Generate a csv file at the save destination
-   
-### How to Specify the Created Camera Path  
-1. Select Hierarchy Window > Capsule > Camera  
-
-2. Specify the path of the csv file in RGBSave.cs > Load Camera Pose Path  
-
-&nbsp;&nbsp;&nbsp;&nbsp;(The same applies to generating depth images)
 
 ## Reference
 
