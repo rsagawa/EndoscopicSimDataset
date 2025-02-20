@@ -3,7 +3,7 @@ Adding Function to Generate RGB Images and Depth Data
 
 ## Overview
 
-&nbsp;&nbsp;This repository provides the function for generating simulation image data of the gastrointestinal tract based on VR-Caps.
+This repository provides the function for generating simulation image data of the gastrointestinal tract based on VR-Caps.
 Image generation consists of the following two steps:
 
 - Creating arbitrary camera paths using Unity's GUI  
