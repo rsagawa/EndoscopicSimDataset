@@ -20,7 +20,7 @@ Image generation consists of the following two steps:
 
 ### 1. Installation
 
-Clone the repository  
+Clone the repository from the following
 
 ```sh
 
