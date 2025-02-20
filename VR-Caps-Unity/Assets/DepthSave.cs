@@ -23,9 +23,6 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
 
     public ClampedFloatParameter depthDistance = new ClampedFloatParameter(1f, 0f, 32f);
 
-    // private List<List<string>> csvDatas = new List<List<string>>();
-    // private List<List<string>> csvDatas3 = new List<List<string>>();
-
     List<string> filenames = new List<string>
     {
         "colon_polyp1",
@@ -150,13 +147,13 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
         double[] readData(TextAsset filename)
         {
             StringReader datreader = new StringReader(filename.text);
-            // ファイルの各行を読み込んで、配列に格納する
+            // Read Each Line of File and Store in Array
             string[] lines = datreader.ReadToEnd().Split('\n');
 
-            // 出力データを格納するための配列を作成する
+            // Create Array to Store Output Data
             double[] data = new double[lines.Length];
 
-            // 各行を処理して、出力データを取得する
+            // Process Each Line to Obtain Output Data
             for (int i = 0; i < lines.Length - 1; i++)
             {
                 // Debug.Log(lines[i]);
@@ -181,8 +178,6 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
 
     IEnumerator capture(List<List<string>> poses, string save_dir, string filename)
     {
-        UnityEngine.Debug.Log("Capture Start.");
-
         (double[] zbuff_val, double[] depth_val) = load_depth_info();
 
         int FindSegment(double[] _x, double x)
@@ -207,15 +202,13 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
             this.transform.position = pos;
             transform.localRotation = rot;
 
-            UnityEngine.Debug.Log(poses[i][0] + " " + poses[i][1] + " " + poses[i][2]);
-
             var mainCamObj = GameObject.FindGameObjectWithTag("Player");
             var cam = mainCamObj.GetComponent<Camera>();
             RenderTexture rTex = cam.targetTexture;
 
-            Texture2D tex = new Texture2D(320, 320, TextureFormat.RGBAFloat, false);///////////////////////////////////////////
-                                                                                    // Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBAFloat, false);///////////////////////////////////////////
-                                                                                    // RenderTexture.active = rTex;
+            Texture2D tex = new Texture2D(320, 320, TextureFormat.RGBAFloat, false);
+            // Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBAFloat, false);
+            // RenderTexture.active = rTex;
 
             var rt = new RenderTexture(320, 320, 32);
             cam.targetTexture = rt;
@@ -278,7 +271,7 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
 
                 // pix[k] = pix[k] * mag;
 
-                // 線形化された奥行き値を算出
+                // Calculate Linearized Depth Values
                 // pix[k].r = 2.0f * nearClipPlane * farClipPlane / (farClipPlane + nearClipPlane - depth * (farClipPlane - nearClipPlane));
 
                 // pix[k].r = 1.0f / (zBufferParams.z * pix[k].r + zBufferParams.w);
@@ -298,8 +291,6 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
 
             save_depth(save_depth_path, bytes);
         }
-
-        UnityEngine.Debug.Log("Capture End.");
     }
 
     IEnumerator original_unit_proc(string input_csv_path, string Save_Folder_Path)
@@ -332,28 +323,22 @@ public class DepthSave : MonoBehaviour, IPostProcessComponent
 
     IEnumerator original_process(string input_csv_path, string Save_Folder_Path)
     {
-        UnityEngine.Debug.Log("process start: " + input_csv_path);
         yield return original_unit_proc(input_csv_path, Save_Folder_Path);
-        UnityEngine.Debug.Log("process end: " + input_csv_path);
+        UnityEngine.Debug.Log("done.");
     }
 
     IEnumerator default_process(string Save_Folder_Path)
     {
         foreach (string filename in filenames)
         {
-            UnityEngine.Debug.Log("process start: " + filename);
             yield return default_unit_proc(filename, Save_Folder_Path);
-            UnityEngine.Debug.Log("process end: " + filename);
+            UnityEngine.Debug.Log("done.");
         }
     }
 
     IEnumerator Record()
     {
-        if (Directory.Exists(Save_Folder_Path))
-        {
-            UnityEngine.Debug.Log("Detect Save Directory.");
-        }
-        else
+        if (!Directory.Exists(Save_Folder_Path))
         {
             UnityEngine.Debug.Log("Please Set Corrected Save Directory.");
             yield break;

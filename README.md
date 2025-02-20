@@ -32,7 +32,7 @@ Image generation consists of the following two steps:
 
 1. Select Hierarchy Window > Capsule > Camera  
 2. Enable the checkbox for RGBSave.cs  
-3. Enter the absolute path of the save destination in RGBSave.cs > Save Folder Path  
+3. Enter the absolute path of the save destination in RGBSave.cs > Save Folder Path (Specify Directory Path)  
    ![setting](readme_imgs/Unity_figure_RGB_all.png)
 4. Press the play button (play icon) to automatically start shooting along the camera path  
    -> Generate RGB images (.png) at the save destination
@@ -44,7 +44,7 @@ Image generation consists of the following two steps:
    ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
 3. Select Hierarchy Window > Capsule > Camera  
 4. Enable the checkbox for DepthSave.cs  
-5. Enter the absolute path of the save destination in DepthSave.cs > Save Folder Path  
+5. Enter the absolute path of the save destination in DepthSave.cs > Save Folder Path (Specify Directory Path)  
   ![setting](readme_imgs/Unity_Depth_all.png)  
 6. Press the play button to automatically start shooting along the camera path  
    -> Generate depth image data (.exr) at the save destination  
@@ -66,7 +66,7 @@ The data we generated can be downloaded from the following
 
 3. Disable the checkboxes for RGBSave.cs and DepthSave.cs  
 
-4. Enter the absolute path of the save destination in CameraPathSave.cs > Save Path  
+4. Enter the absolute path of the save destination in CameraPathSave.cs > Save Path (Specify File Path)  
 
 5. Press the play button to enable camera movement using mouse and key operations  
 
@@ -83,7 +83,7 @@ The data we generated can be downloaded from the following
 
 1. Select Hierarchy Window > Capsule > Camera  
 
-2. Specify the path of the csv file in RGBSave.cs > Load Camera Pose Path  
+2. Specify the path of the csv file in RGBSave.cs > Load Camera Pose Path (Specify File Path)  
 
 &nbsp;&nbsp;&nbsp;&nbsp;(The same applies to generating depth images)
 
