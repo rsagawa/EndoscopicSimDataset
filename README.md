@@ -49,7 +49,7 @@ Image generation consists of the following two steps:
 6. Press the play button to automatically start shooting along the camera path  
    -> Generate depth image data (.exr) at the save destination  
 
-## Our Dataset Download
+## Download Our Dataset  
 
 The data we generated can be downloaded from the following
 ```sh
