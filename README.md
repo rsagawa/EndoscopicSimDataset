@@ -9,26 +9,22 @@ Image generation consists of the following two steps:
 - Creating arbitrary camera paths using Unity's GUI  
 - Generating RGB or Depth images along the camera path
 
-## Development Environment
+## Dependencies
 
 - Unity version: 2019.3.3f1  
 - Unity Hub  
 - Anaconda  
 - Python 3.10  
 
-## Getting Started
+## Setup
 
-### 1. Installation
-
-Clone the repository from the following
+1. Clone the repository from the following  
 
 ```sh
 
 ```  
 
-### 2. Launch the project  
-
-Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity
+2. Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity  
 
 ## Data Creation Method  
 
@@ -53,7 +49,7 @@ Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity
 6. Press the play button to automatically start shooting along the camera path  
    -> Generate depth image data (.exr) at the save destination  
 
-## Download
+## Our Dataset Download
 
 The data we generated can be downloaded from the following
 ```sh
