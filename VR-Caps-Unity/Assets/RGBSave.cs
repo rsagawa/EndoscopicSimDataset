@@ -190,8 +190,6 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
 
     IEnumerator capture(List<List<string>> poses, string save_dir, string filename)
     {
-        //UnityEngine.Debug.Log("Capture Start.");
-
         for (int i = 0; i < poses.Count; i++)
         {
             yield return null;
@@ -202,15 +200,11 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
             this.transform.position = pos;
             transform.localRotation = rot;
 
-            //UnityEngine.Debug.Log(poses[i][0] +" "+ poses[i][1] + " " + poses[i][2]);
-
             string outputFile = filename + "_" + i.ToString("D5");
             string save_rgb_path = save_dir + "/" + outputFile + ".png";
 
             save_rgb(save_rgb_path);
         }
-
-        //UnityEngine.Debug.Log("Capture End.");
     }
 
     IEnumerator original_unit_proc(string input_csv_path, string Save_Folder_Path)
@@ -243,18 +237,16 @@ public class RGBSave : MonoBehaviour, IPostProcessComponent
 
     IEnumerator original_process(string input_csv_path, string Save_Folder_Path)
     {
-        //UnityEngine.Debug.Log("process start: " + input_csv_path);
         yield return original_unit_proc(input_csv_path, Save_Folder_Path);
-        //UnityEngine.Debug.Log("process end: " + input_csv_path);
+        UnityEngine.Debug.Log("done.");
     }
 
     IEnumerator default_process(string Save_Folder_Path)
     {
         foreach (string filename in filenames)
         {
-            //UnityEngine.Debug.Log("process start: " + filename);
             yield return default_unit_proc(filename, Save_Folder_Path);
-            //UnityEngine.Debug.Log("process end: " + filename);
+            UnityEngine.Debug.Log("done.");
         }
     }
 

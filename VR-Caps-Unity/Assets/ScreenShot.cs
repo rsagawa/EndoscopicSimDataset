@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 
 /// <summary>
-/// 指定されたカメラの内容をキャプチャするサンプル
+/// Sample to Capture Specified Camera Content
 /// </summary>
 public class ScreenShot : MonoBehaviour
 {
@@ -16,11 +16,11 @@ public class ScreenShot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CaptureScreenShot("CameraScreenShot.png");
-                Debug.Log("save");
+            Debug.Log("Save ScreenShot");
         }
     }
 
-    // カメラのスクリーンショットを保存する
+    // Save Camera Screenshot
     private void CaptureScreenShot(string filePath)
     {
         var rt = new RenderTexture(_camera.pixelWidth, _camera.pixelHeight, 24);

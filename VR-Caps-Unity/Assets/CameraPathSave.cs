@@ -7,9 +7,9 @@ using System;
 using System.Threading;
 using System.Diagnostics;
 
-//カメラパスの保存
+//Save camera path
 
-public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPlay中に起動する
+public class CameraPathSave : MonoBehaviour//MonoBehavior is basically activated during Play mode
 {
 
 #if UNITY_EDITOR
@@ -20,55 +20,36 @@ public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPla
 
     private List<string> poses = new List<string>();
 
-    //StreamWriter sw;
-
-    //private float count = 0;
-
-    //カメラの移動量
+    //Camera movement amount
     [SerializeField, Range(0.01f, 100.0f)]
-
-    private float _positionStep = 0.1f;////////////////////
+    private float _positionStep = 0.1f;
 
     [SerializeField, Range(0f, 2f)]
-
     private float _mouseSensitive = 0.05f;
 
-    //カメラ操作の有効無効
-
+    //Enable/disable camera control
     private bool _cameraMoveActive = true;
 
-    //カメラのtransform  
+    //Camera transform
     private Transform _camTransform;
     private Transform _camTransformf;
 
-
     private Vector3 _startTransform;
 
-    //マウスの始点 
+    //Mouse starting point
     private Vector3 _startMousePos;
-    //カメラ回転の始点情報
+    //Camera Rotation Start Information
     private Vector3 _presentCamRotation;
     private Vector3 _presentCamPos;
 
-    //初期状態 Rotation
+    //Initial State Rotation
     private Quaternion _initialCamRotation;
 
-
-    //UIメッセージの表示
+    //Display UI Message
     //private bool _uiMessageActiv;
-
-
-    //private Quaternion q;
-    //float X;
-    //float Y;
-    //float Z;
-
-
-
 
     void Start()
     {
-        //StartCoroutine("WriteCSV");
         StartCoroutine("Capture");
     }
 
@@ -80,7 +61,6 @@ public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPla
 
             if (Input.GetKey(KeyCode.Space))
             {
-                //UnityEngine.Debug.Log("Capture Space.");
                 var wait = new WaitForSeconds((float)0.5);
                 isRecording = true;
                 yield return wait;
@@ -93,22 +73,17 @@ public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPla
             //if (Input.GetKey(KeyCode.N))
             //{
             //    string write_path = Save_Path;
-
-                //    string Save_CSV_DIR = Path.GetDirectoryName(write_path);
-
-                //    if (!Directory.Exists(Save_CSV_DIR))
-                //    {
-                //        UnityEngine.Debug.Log("Cant Find Save CSV Path.");
-                //        yield break;
-                //    }
-
-                //    yield return write_csv(poses, write_path);
-
-                //    isRecording = false;
-
-                //    var wait2 = new WaitForSeconds((float)0.5);
-                //    yield return wait2;
-                //}
+            //    string Save_CSV_DIR = Path.GetDirectoryName(write_path);
+            //    if (!Directory.Exists(Save_CSV_DIR))
+            //    {
+            //        UnityEngine.Debug.Log("Cant Find Save CSV Path.");
+            //        yield break;
+            //    }
+            //    yield return write_csv(poses, write_path);
+            //    isRecording = false;
+            //    var wait2 = new WaitForSeconds((float)0.5);
+            //    yield return wait2;
+            //}
         }
     }
 
@@ -130,8 +105,6 @@ public class CameraPathSave : MonoBehaviour////MonoBehaviorは基本的にはPla
         }
 
         sw.Close();
-
-        //UnityEngine.Debug.Log("Writing done.");
 
         yield return null;
     }
