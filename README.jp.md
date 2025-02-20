@@ -1,0 +1,116 @@
+RGB画像と深度データを生成するための機能追加
+=====
+
+
+## 概要
+&nbsp;&nbsp;本リポジトリはVR-Capsに基づいて、消化器内部のシミュレーション画像データを生成するインターフェースを提供するものである。
+画像生成は下記の２ステップからなる。  
+
+・UnityのGUIを利用した任意カメラパスの作成  
+・カメラパスに沿ったRGB画像またはDepth画像の生成  
+
+## 開発環境
+・Unity version: 2019.3.3f1  
+・Unity Hub  
+・Anaconda  
+・Python 3.10  
+
+## 始め方
+
+### 1. インストール
+#### レポジトリのクローン
+```sh
+https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git  
+```  
+
+### 2. プロジェクトの起動  
+VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動 
+
+## データ作成方法  
+### RGB画像の生成  
+1. Hierarchy Window > Capsule > Cameraを選択  
+2. RGBSave.csのチェックボックスを有効  
+3. RGBSave.cs > Save Folder Path に保存先の絶対パスを記入  
+   ![setting](readme_imgs/Unity_figure_RGB_all.png)
+4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
+   -> 保存先にRGB画像(.png)を生成
+   
+### 深度画像の生成  
+1. Edit Tab > Project Setting > HDRP Default Settings > After Post Process > DepthExampleを指定
+   ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)
+   ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
+3. Hierarchy Window > Capsule > Cameraを選択  
+4. DepthSave.csのチェックボックスを有効  
+5. DepthSave.cs > Save Folder Path に保存先の絶対パスを記入  
+   ![setting](readme_imgs/Unity_Depth_all.png)  
+6. 実行ボタンを押すと自動でカメラパスに沿って撮影を開始  
+   -> 保存先に深度画像データ(.exr)を生成  
+
+## ダウンロード
+我々が生成したデータは、下記からダウンロード可能
+```sh
+
+```  
+
+## その他
+### 深度データの確認方法  
+
+1. 下記モジュールをインストール  
+・numpy  
+・openEXR  
+・matplotlib  
+```sh
+conda install numpy
+conda install -c conda-forge openexr-python
+pip install matplotlib
+```  
+
+2. 確認に使うexr画像ファイルの上でShift+右クリックしパスのコピーを選択  
+
+3. コピーしたパスをVR-Caps-Unity/Assets/test_exr.py内のfilename変数に指定  
+
+4. コマンドプロンプト等でtest_exr.pyを実行  
+![fig](readme_imgs/text_exr.png)
+
+### カメラパスの作成方法  
+1. Hierarchy Window > Capsule > Cameraを選択  
+
+2. CameraPathSave.csとCameraMover.csのチェックボックスを有効  
+
+3. RGBSave.csとDepthSave.csのチェックボックスを無効  
+
+4. CameraPathSave.cs > Save Path に保存先の絶対パスを記入  
+
+5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
+
+   ・W : 前方向, S : 後方向, A : 左方向, D : 右方向  
+   ・Q : 上昇, E : 下降  
+   ・マウスのドラッグ : 任意回転  
+
+6. スペースキー押下でカメラパスの記録開始
+7. 再度スペースキー押下でカメラパスの記録終了  
+   -> 保存先にcsvファイルを生成  
+
+### 作成したカメラパスの指定方法  
+1. Hierarchy Window > Capsule > Cameraを選択  
+
+2. RGBSave.cs > Load Camera Pose Path にcsvファイルのパスを指定  
+
+&nbsp;&nbsp;&nbsp;&nbsp;(デプス画像の生成も上記と同じ)  
+
+## Reference
+
+```
+@misc{incetan2020vrcaps,
+      title={VR-Caps: A Virtual Environment for Capsule Endoscopy}, 
+      author={Kagan Incetan and Ibrahim Omer Celik and Abdulhamid Obeid and Guliz Irem Gokceler and Kutsev Bengisu Ozyoruk and Yasin Almalioglu and Richard J. Chen and Faisal Mahmood and Hunter Gilbert and Nicholas J. Durr and Mehmet Turan},
+      year={2020},
+      eprint={2008.12949},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
+
+
+
