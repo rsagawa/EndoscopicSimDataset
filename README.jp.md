@@ -24,37 +24,45 @@ git clone https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git
 ```  
 
 ### プロジェクトの起動  
-VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動 
+VR-Caps-Unity / Assets / Scenes / Record_scene.unityを起動 
 
 
 ## カメラパスの生成  
 
 ### GUIを用いたカメラパスの記録
 1. Hierarchy Window > Capsule > Cameraを選択  
-2. CameraPathSave.csとCameraMover.csのチェックボックスを有効  
-3. RGBSave.csとDepthSave.csのチェックボックスを無効  
-4. CameraPathSave.cs > Save Path に保存先の絶対パスを記入  
-5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
+2. Inspector Window > CameraMover のチェックボックスを有効
+3. Inspector Window > CameraPathSave のチェックボックスを有効
+4. Inspector Window > CameraPathSave > Save Path にcsvファイルのパスを指定  
+   ![setting](readme_imgs/Unity_CameraPath_all.png)
+6. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
    ・W : 前方向, S : 後方向, A : 左方向, D : 右方向  
    ・Q : 上昇, E : 下降  
    ・マウスのドラッグ : 任意回転  
-6. スペースキー押下でカメラパスの記録開始
-7. 再度スペースキー押下でカメラパスの記録終了  
+7. スペースキー押下でカメラパスの記録開始
+8. 再度スペースキー押下でカメラパスの記録終了  
    -> 保存先にcsvファイルを生成  
 
 
 ## 画像データ生成
 
 ### 作成したカメラパスの指定方法  
+自作のカメラパスを使う場合：  
 1. Hierarchy Window > Capsule > Cameraを選択  
-2. RGBSave.cs > Load Camera Pose Path にcsvファイルのパスを指定  
+2. Inspector Window > Depth Save > Load Camera Pose Path にcsvファイルのパスを指定  
+3. Inspector Window > RGB Save > Load Camera Pose Path にcsvファイルのパスを指定  
+   ![setting](readme_imgs/Unity_select_camerapath_all.png)
 
-&nbsp;&nbsp;&nbsp;&nbsp;(デプス画像の生成も上記と同じ)  
+自作のカメラパスを使わない場合：  
+1. Hierarchy Window > Capsule > Cameraを選択
+2. Inspector Window > Depth Save > Load Camera Pose Path を空に指定 (何も記載しない)  
+3. Inspector Window > RGB Save > Load Camera Pose Path を空に指定 (何も記載しない)  
+   -> VR-Caps-Unity / Assets / Resources に存在するカメラパスを自動読み込み
 
 ### RGB画像の生成  
 1. Hierarchy Window > Capsule > Cameraを選択  
-2. RGBSave.csのチェックボックスを有効  
-3. RGBSave.cs > Save Folder Path に保存先の絶対パスを記入  
+2. Inspector Window > RGB Save のチェックボックスを有効  
+3. Inspector Window > RGB Save > Save Folder Path に保存先のフォルダパスを指定  
    ![setting](readme_imgs/Unity_figure_RGB_all.png)
 4. 実行ボタン(再生マーク)を押すと自動でカメラパスに沿って撮影を開始  
    -> 保存先にRGB画像(.png)を生成
@@ -63,11 +71,11 @@ VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動
 1. Edit Tab > Project Setting > HDRP Default Settings > After Post Process > DepthExampleを指定
    ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)
    ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
-3. Hierarchy Window > Capsule > Cameraを選択  
-4. DepthSave.csのチェックボックスを有効  
-5. DepthSave.cs > Save Folder Path に保存先の絶対パスを記入  
+2. Hierarchy Window > Capsule > Cameraを選択  
+3. Inspector Window > Depth Save のチェックボックスを有効  
+4. Inspector Window > Depth Save > Save Folder Path に保存先のフォルダパスを指定  
    ![setting](readme_imgs/Unity_Depth_all.png)  
-6. 実行ボタンを押すと自動でカメラパスに沿って撮影を開始  
+5. 実行ボタンを押すと自動でカメラパスに沿って撮影を開始  
    -> 保存先に深度画像データ(.exr)を生成  
 
 ### 深度データの確認方法  
@@ -82,12 +90,12 @@ conda install -c conda-forge openexr-python
 pip install matplotlib
 ```  
 
-2. 確認に使うexr画像ファイルの上でShift+右クリックしパスのコピーを選択  
+2. exrファイルのパスをコピー  
 
-3. コピーしたパスをVR-Caps-Unity/Assets/test_exr.py内のfilename変数に指定  
+3. コピーしたパスを VR-Caps-Unity/Assets/test_exr.py 内の filename 変数に指定  
 
 4. コマンドプロンプト等でtest_exr.pyを実行  
-![fig](readme_imgs/text_exr.png)
+![fig](readme_imgs/txt_exr.png)
 
 ## ダウンロード
 これまでに生成したデータは、下記からダウンロード可能である。
