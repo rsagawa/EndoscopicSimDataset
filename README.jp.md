@@ -31,16 +31,18 @@ VR-Caps-Unity / Assets / Scenes / Record_scene.unityを起動
 
 ### GUIを用いたカメラパスの記録
 1. Hierarchy Window > Capsule > Cameraを選択  
-2. Inspector Window > CameraMover のチェックボックスを有効
-3. Inspector Window > CameraPathSave のチェックボックスを有効
+2. Inspector Window > CameraMover のチェックボックスを有効  
+3. Inspector Window > CameraPathSave のチェックボックスを有効  
 4. Inspector Window > CameraPathSave > Save Path にcsvファイルのパスを指定  
    ![setting](readme_imgs/Unity_CameraPath_all.png)
-6. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
+5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
+
    ・W : 前方向, S : 後方向, A : 左方向, D : 右方向  
    ・Q : 上昇, E : 下降  
    ・マウスのドラッグ : 任意回転  
-7. スペースキー押下でカメラパスの記録開始
-8. 再度スペースキー押下でカメラパスの記録終了  
+
+6. スペースキー押下でカメラパスの記録開始  
+7. 再度スペースキー押下でカメラパスの記録終了  
    -> 保存先にcsvファイルを生成  
 
 
@@ -53,11 +55,13 @@ VR-Caps-Unity / Assets / Scenes / Record_scene.unityを起動
 3. Inspector Window > RGB Save > Load Camera Pose Path にcsvファイルのパスを指定  
    ![setting](readme_imgs/Unity_select_camerapath_all.png)
 
-自作のカメラパスを使わない場合：  
-1. Hierarchy Window > Capsule > Cameraを選択
+自作のカメラパスを使わない場合 (私たちがデータ作成で使用したカメラパスを使用)：  
+
+1. Hierarchy Window > Capsule > Cameraを選択  
 2. Inspector Window > Depth Save > Load Camera Pose Path を空に指定 (何も記載しない)  
 3. Inspector Window > RGB Save > Load Camera Pose Path を空に指定 (何も記載しない)  
-   -> VR-Caps-Unity / Assets / Resources に存在するカメラパスを自動読み込み
+
+(VR-Caps-Unity / Assets / Resources に存在するカメラパスを自動読み込み)  
 
 ### RGB画像の生成  
 1. Hierarchy Window > Capsule > Cameraを選択  
