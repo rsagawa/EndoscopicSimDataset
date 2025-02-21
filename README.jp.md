@@ -61,7 +61,7 @@ VR-Caps-Unity / Assets / Scenes / Record_scene.unityを起動
 2. Inspector Window > Depth Save > Load Camera Pose Path を空に指定 (何も記載しない)  
 3. Inspector Window > RGB Save > Load Camera Pose Path を空に指定 (何も記載しない)  
 
-(VR-Caps-Unity / Assets / Resources に存在するカメラパスを自動読み込み)  
+    (VR-Caps-Unity / Assets / Resources に存在するカメラパスを自動読み込み)  
 
 ### RGB画像の生成  
 1. Hierarchy Window > Capsule > Cameraを選択  
