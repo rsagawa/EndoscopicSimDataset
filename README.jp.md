@@ -98,6 +98,7 @@ pip install matplotlib
 3. コピーしたパスを VR-Caps-Unity/Assets/test_exr.py 内の filename 変数に指定  
 
 4. コマンドプロンプト等でtest_exr.pyを実行  
+-> 下記のようなデプス形状が表示される  
 ![fig](readme_imgs/txt_exr.png)
 
 # ダウンロード
