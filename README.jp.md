@@ -3,10 +3,9 @@
 
 
 ## 概要
-本リポジトリは、カプセル内視鏡用のシミュレーション環境である[VR-Caps](URL "https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy")に基づいて、消化器内部のシミュレーション画像データを生成するインターフェースを提供するものである。
+本リポジトリは、カプセル内視鏡用のシミュレーション環境である[VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy)に基づいて、消化器内部のシミュレーション画像データを生成するインターフェースを提供するものである。
 本レポジトリでは、VR-Capsに下記の２ステップを追加し画像生成を行う方法を実装した。
-EMBC2024において発表した[論文](URL "https://ieeexplore.ieee.org/abstract/document/10782148")では、
-このインターフェースを利用してこれまでに作成した[データセット](#ダウンロード)を利用した。
+EMBC2024において発表した論文[View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148)で利用したデータセットは[ダウンロード](#ダウンロード)を参照。
 
 ・UnityのGUIを利用した任意カメラパスの作成  
 ・カメラパスに沿ったRGB画像またはDepth画像の生成  
