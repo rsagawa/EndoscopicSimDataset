@@ -1,32 +1,56 @@
-RGB画像と深度データを生成するための機能追加
+内視鏡シミュレーション映像データセット
 =====
 
 
 ## 概要
-&nbsp;&nbsp;本リポジトリはVR-Capsに基づいて、消化器内部のシミュレーション画像データを生成するインターフェースを提供するものである。
-画像生成は下記の２ステップからなる。  
+本リポジトリは、カプセル内視鏡用のシミュレーション環境である[VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy)に基づいて、消化器内部のシミュレーション画像データを生成するインターフェースを提供するものである。
+本レポジトリでは、VR-Capsに下記の２ステップを追加し画像生成を行う方法を実装した。
+EMBC2024において発表した論文[View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148)で利用したデータセットは[ダウンロード](#ダウンロード)を参照。
 
 ・UnityのGUIを利用した任意カメラパスの作成  
 ・カメラパスに沿ったRGB画像またはDepth画像の生成  
 
-## 開発環境
+## セットアップ
+
+### 開発環境
 ・Unity version: 2019.3.3f1  
 ・Unity Hub  
 ・Anaconda  
 ・Python 3.10  
 
-## 始め方
-
-### 1. インストール
-#### レポジトリのクローン
+### レポジトリのクローン
 ```sh
-https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git  
+git clone https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git  
 ```  
 
-### 2. プロジェクトの起動  
+### プロジェクトの起動  
 VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動 
 
-## データ作成方法  
+
+## カメラパスの生成  
+
+### GUIを用いたカメラパスの記録
+1. Hierarchy Window > Capsule > Cameraを選択  
+2. CameraPathSave.csとCameraMover.csのチェックボックスを有効  
+3. RGBSave.csとDepthSave.csのチェックボックスを無効  
+4. CameraPathSave.cs > Save Path に保存先の絶対パスを記入  
+5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
+   ・W : 前方向, S : 後方向, A : 左方向, D : 右方向  
+   ・Q : 上昇, E : 下降  
+   ・マウスのドラッグ : 任意回転  
+6. スペースキー押下でカメラパスの記録開始
+7. 再度スペースキー押下でカメラパスの記録終了  
+   -> 保存先にcsvファイルを生成  
+
+
+## 画像データ生成
+
+### 作成したカメラパスの指定方法  
+1. Hierarchy Window > Capsule > Cameraを選択  
+2. RGBSave.cs > Load Camera Pose Path にcsvファイルのパスを指定  
+
+&nbsp;&nbsp;&nbsp;&nbsp;(デプス画像の生成も上記と同じ)  
+
 ### RGB画像の生成  
 1. Hierarchy Window > Capsule > Cameraを選択  
 2. RGBSave.csのチェックボックスを有効  
@@ -46,13 +70,6 @@ VR-Caps-Unity > Assets > Scenes > Record_scene.unityを起動
 6. 実行ボタンを押すと自動でカメラパスに沿って撮影を開始  
    -> 保存先に深度画像データ(.exr)を生成  
 
-## ダウンロード
-我々が生成したデータは、下記からダウンロード可能
-```sh
-
-```  
-
-## その他
 ### 深度データの確認方法  
 
 1. 下記モジュールをインストール  
@@ -72,42 +89,21 @@ pip install matplotlib
 4. コマンドプロンプト等でtest_exr.pyを実行  
 ![fig](readme_imgs/text_exr.png)
 
-### カメラパスの作成方法  
-1. Hierarchy Window > Capsule > Cameraを選択  
+## ダウンロード
+これまでに生成したデータは、下記からダウンロード可能である。
+```sh
 
-2. CameraPathSave.csとCameraMover.csのチェックボックスを有効  
-
-3. RGBSave.csとDepthSave.csのチェックボックスを無効  
-
-4. CameraPathSave.cs > Save Path に保存先の絶対パスを記入  
-
-5. 実行ボタンを押下すると、マウスとキー操作によるカメラ移動が可能  
-
-   ・W : 前方向, S : 後方向, A : 左方向, D : 右方向  
-   ・Q : 上昇, E : 下降  
-   ・マウスのドラッグ : 任意回転  
-
-6. スペースキー押下でカメラパスの記録開始
-7. 再度スペースキー押下でカメラパスの記録終了  
-   -> 保存先にcsvファイルを生成  
-
-### 作成したカメラパスの指定方法  
-1. Hierarchy Window > Capsule > Cameraを選択  
-
-2. RGBSave.cs > Load Camera Pose Path にcsvファイルのパスを指定  
-
-&nbsp;&nbsp;&nbsp;&nbsp;(デプス画像の生成も上記と同じ)  
+```  
 
 ## Reference
-
 ```
-@misc{incetan2020vrcaps,
-      title={VR-Caps: A Virtual Environment for Capsule Endoscopy}, 
-      author={Kagan Incetan and Ibrahim Omer Celik and Abdulhamid Obeid and Guliz Irem Gokceler and Kutsev Bengisu Ozyoruk and Yasin Almalioglu and Richard J. Chen and Faisal Mahmood and Hunter Gilbert and Nicholas J. Durr and Mehmet Turan},
-      year={2020},
-      eprint={2008.12949},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@inproceedings{masuda2024view,
+  title={View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting},
+  author={Masuda, Takeshi and Sagawa, Ryusuke and Furukawa, Ryo and Kawasaki, Hiroshi},
+  booktitle={2024 46th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)},
+  pages={1--6},
+  year={2024},
+  organization={IEEE}
 }
 ```
 
