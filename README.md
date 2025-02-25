@@ -5,7 +5,7 @@ Adding Function to Generate RGB Images and Depth Data
 # Overview
 This repository provides an interface for generating simulation image data of the gastrointestinal tract based on the simulation environment [VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy) for capsule endoscopy. It implements a method to add the following two steps to VR-Caps for generating images. The dataset used in the paper [View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148), presented at EMBC2024, can be downloaded [here](#download).
 
-- Creating Custom Camera Path Using Unity GUI  
+- Creating custom camera path using unity gui  
 - Generating RGB or Depth Images along camera path  
 
 # Setup
