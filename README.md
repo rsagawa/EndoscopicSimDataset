@@ -1,95 +1,95 @@
 Adding Function to Generate RGB Images and Depth Data
 =====
 
-## Overview
 
-This repository provides the function for generating simulation image data of the gastrointestinal tract based on VR-Caps.
-Image generation consists of the following two steps:
+# Overview
+This repository provides an interface for generating simulation image data of the gastrointestinal tract based on the simulation environment [VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy) for capsule endoscopy. It implements a method to add the following two steps to VR-Caps for generating images. The dataset used in the paper [View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148), presented at EMBC2024, can be downloaded [here](#download).
 
-- Creating arbitrary camera paths using Unity's GUI  
-- Generating RGB or Depth images along the camera path
+- Creating custom camera path using unity gui  
+- Generating RGB or Depth Images along camera path  
+
+# Setup
 
 ## Dependencies
-
 - Unity version: 2019.3.3f1  
 - Unity Hub  
 - Anaconda  
 - Python 3.10  
 
-## Setup
-
-1. Clone the repository from the following  
-
+## Clone the repository
 ```sh
-
+  
 ```  
 
-2. Launch VR-Caps-Unity > Assets > Scenes > Record_scene.unity  
+## Launch the Unity Project  
+Run **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**. 
 
-## Data Creation Method  
 
-### Generating RGB Images  
+# Generating Camera Path  
 
-1. Select Hierarchy Window > Capsule > Camera  
-2. Enable the checkbox for RGBSave.cs  
-3. Enter the absolute path of the save destination in RGBSave.cs > Save Folder Path (Specify Directory Path)  
-   ![setting](readme_imgs/Unity_figure_RGB_all.png)
-4. Press the play button (play icon) to automatically start shooting along the camera path  
-   -> Generate RGB images (.png) at the save destination
-   
-### Generating Depth Images  
+## Recording Camera Path Using GUI
+1. Select **Hierarchy Window > Capsule > Camera**.  
+2. Check the box for **Inspector Window > Camera Mover**.  
+3. Check the box for **Inspector Window > Camera Path Save**.  
+4. Specify the file path for the CSV in **Inspector Window > Camera Path Save > Save Path**.  
 
-1. Select Edit Tab > Project Setting > HDRP Default Settings > After Post Process > DepthExample
-   ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)
-   ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)
-3. Select Hierarchy Window > Capsule > Camera  
-4. Enable the checkbox for DepthSave.cs  
-5. Enter the absolute path of the save destination in DepthSave.cs > Save Folder Path (Specify Directory Path)  
-  ![setting](readme_imgs/Unity_Depth_all.png)  
-6. Press the play button to automatically start shooting along the camera path  
-   -> Generate depth image data (.exr) at the save destination  
+   ![setting](readme_imgs/Unity_CameraPath_all.png)
+5. Click the play button (triangle icon) to enable camera movement using the mouse and keyboard:  
 
-## Download Our Dataset  
+   W : Move forward  
+   S : Move backward  
+   A : Move left  
+   D : Move right   
+   Q : Move up  
+   E : Move down    
+   Mouse Drag : Rotate the camera freely  
 
-The data we generated can be downloaded from the following
-```sh
+6. Press the **space key** to start recording the camera path.  
+7. Press the **space key** again to stop recording the camera path.  
+   -> The csv file will be generated at the specified save location.  
 
-```  
 
-## Others
+# Generating Image Data
 
-### How to Create Camera Paths  
+## How to Specify the Created Camera Path  
+### Generating from a Single Camera Path  
+1. Select **Hierarchy Window > Capsule > Camera**.  
+2. Specify the path of the CSV file in **Inspector Window > Depth Save > Load Camera Pose Path**.  
+3. Specify the path of the CSV file in **Inspector Window > RGB Save > Load Camera Pose Path**.  
+   ![setting](readme_imgs/Unity_select_camerapath_all.png)  
 
-1. Select Hierarchy Window > Capsule > Camera  
+### Generating from Multiple Camera Paths  
+1. Place multiple camera path CSV files in **VR-Caps-Unity / Assets / Resources**.  
+2. Select **Hierarchy Window > Capsule > Camera**.  
+3. Set **Inspector Window > Depth Save > Load Camera Pose Path** to empty (leave it blank).  
+4. Set **Inspector Window > RGB Save > Load Camera Pose Path** to empty (leave it blank).  
 
-2. Enable the checkboxes for CameraPathSave.cs and CameraMover.cs  
+---
 
-3. Disable the checkboxes for RGBSave.cs and DepthSave.cs  
+## Generating RGB Images  
+1. Select **Hierarchy Window > Capsule > Camera**.  
+2. Enable the checkbox for **Inspector Window > RGB Save**.  
+3. Specify the save folder path in **Inspector Window > RGB Save > Save Folder Path**.  
+   ![setting](readme_imgs/Unity_figure_RGB_all.png)  
+4. Press the Play button to automatically start capturing images along the camera path.  
+   -> RGB images (.png) will be generated in the specified folder.  
 
-4. Enter the absolute path of the save destination in CameraPathSave.cs > Save Path (Specify File Path)  
+---
 
-5. Press the play button to enable camera movement using mouse and key operations  
+## Generating Depth Images  
+1. Go to **Edit Tab > Project Settings > HDRP Default Settings > After Post Process** and select **DepthExample**.  
+   ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)  
+   ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)  
+2. Select **Hierarchy Window > Capsule > Camera**.  
+3. Enable the checkbox for **Inspector Window > Depth Save**.  
+4. Specify the save folder path in **Inspector Window > Depth Save > Save Folder Path**.  
+   ![setting](readme_imgs/Unity_Depth_all.png)  
+5. Press the Play button to automatically start capturing images along the camera path.  
+   -> Depth image data (.exr) will be generated in the specified folder.
 
-   - W: Forward, S: Backward, A: Left, D: Right  
-   - Q: Up, E: Down  
-   - Mouse drag: Arbitrary rotation
+## How to Check Depth Data   
 
-6. Press the space key to start recording the camera path
-
-7. Press the space key again to stop recording the camera path  
-   -> Generate a csv file at the save destination
-   
-### How to Specify the Created Camera Path  
-
-1. Select Hierarchy Window > Capsule > Camera  
-
-2. Specify the path of the csv file in RGBSave.cs > Load Camera Pose Path (Specify File Path)  
-
-&nbsp;&nbsp;&nbsp;&nbsp;(The same applies to generating depth images)
-
-### How to Check Depth Data  
-
-1. Install the following modules  
+1. Install the following modules.  
 - numpy  
 - openEXR  
 - matplotlib  
@@ -99,23 +99,29 @@ conda install -c conda-forge openexr-python
 pip install matplotlib
 ```  
 
-2. Right-click on the exr image file to be checked and select Copy Path  
+2. Copy the path of the exr file.    
 
-3. Specify the copied path in the filename variable in VR-Caps-Unity/Assets/test_exr.py  
+3. Specify the copied path in the filename variable within **VR-Caps-Unity/Assets/test_exr.py**.  
 
-4. Run test_exr.py in the command prompt, etc.  
-![fig](readme_imgs/text_exr.png)
+4. Run test_exr.py in the command prompt.  
+-> The depth shape like the one below will be displayed.  
+![fig](readme_imgs/txt_exr.png)
 
-## Reference
+# Download
+The data generated can be downloaded from the link below.
+```sh
 
+```  
+
+# Reference
 ```
-@misc{incetan2020vrcaps,
-      title={VR-Caps: A Virtual Environment for Capsule Endoscopy}, 
-      author={Kagan Incetan and Ibrahim Omer Celik and Abdulhamid Obeid and Guliz Irem Gokceler and Kutsev Bengisu Ozyoruk and Yasin Almalioglu and Richard J. Chen and Faisal Mahmood and Hunter Gilbert and Nicholas J. Durr and Mehmet Turan},
-      year={2020},
-      eprint={2008.12949},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@inproceedings{masuda2024view,
+  title={View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting},
+  author={Masuda, Takeshi and Sagawa, Ryusuke and Furukawa, Ryo and Kawasaki, Hiroshi},
+  booktitle={2024 46th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)},
+  pages={1--6},
+  year={2024},
+  organization={IEEE}
 }
 ```
 
