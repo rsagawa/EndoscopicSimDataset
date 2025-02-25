@@ -3,7 +3,7 @@ Adding Function to Generate RGB Images and Depth Data
 
 
 # Overview
-This repository provides an interface for generating simulation image data of the gastrointestinal tract based on the simulation environment [VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy) for capsule endoscopy. It implements a method to add the following two steps to VR-Caps for generating images. The dataset used in the paper ["View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting"](https://ieeexplore.ieee.org/abstract/document/10782148), presented at EMBC2024, can be downloaded [here](#download).
+This repository provides an interface for generating simulation image data of the gastrointestinal tract based on the simulation environment [VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy) for capsule endoscopy. It implements a method to add the following two steps to VR-Caps for generating images. The dataset used in the paper [View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148), presented at EMBC2024, can be downloaded [here](#download).
 
 - Creating Custom Camera Path Using Unity GUI  
 - Generating RGB or Depth Images along camera path  
@@ -22,19 +22,19 @@ This repository provides an interface for generating simulation image data of th
 ```  
 
 ## Launch the Unity Project  
-Launch **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**. 
+Run **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**. 
 
 
 # Generating Camera Path  
 
 ## Recording Camera Path Using GUI
 1. Select **Hierarchy Window > Capsule > Camera**.  
-2. In the **Inspector Window**, check the box for **CameraMover**.  
-3. In the **Inspector Window**, check the box for **CameraPathSave**.  
-4. In the **Inspector Window > Camera Path Save**, specify the file path for the CSV in **Save Path**.  
+2. Check the box for **Inspector Window > Camera Mover**.  
+3. Check the box for **Inspector Window > Camera Path Save**.  
+4. Specify the file path for the CSV in **Inspector Window > Camera Path Save > Save Path**.  
 
    ![setting](readme_imgs/Unity_CameraPath_all.png)
-5. Click the Play button to enable camera movement using the mouse and keyboard:  
+5. Click the play button (triangle icon) to enable camera movement using the mouse and keyboard:  
 
    W : Move forward  
    S : Move backward  
@@ -44,9 +44,9 @@ Launch **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**.
    E : Move down    
    Mouse Drag : Rotate the camera freely  
 
-6. Press the **Spacebar** to start recording the camera path.  
-7. Press the **Spacebar** again to stop recording the camera path.  
-   -> The CSV file is generated at the specified save location.  
+6. Press the **space key** to start recording the camera path.  
+7. Press the **space key** again to stop recording the camera path.  
+   -> The csv file will be generated at the specified save location.  
 
 
 # Generating Image Data
@@ -54,24 +54,24 @@ Launch **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**.
 ## How to Specify the Created Camera Path  
 ### Generating from a Single Camera Path  
 1. Select **Hierarchy Window > Capsule > Camera**.  
-2. In the **Inspector Window > Depth Save**, specify the path of the CSV file in **Load Camera Pose Path**.  
-3. In the **Inspector Window > RGB Save**, specify the path of the CSV file in **Load Camera Pose Path**.  
+2. Specify the path of the CSV file in **Inspector Window > Depth Save > Load Camera Pose Path**.  
+3. Specify the path of the CSV file in **Inspector Window > RGB Save > Load Camera Pose Path**.  
    ![setting](readme_imgs/Unity_select_camerapath_all.png)  
 
 ### Generating from Multiple Camera Paths  
 1. Place multiple camera path CSV files in **VR-Caps-Unity / Assets / Resources**.  
 2. Select **Hierarchy Window > Capsule > Camera**.  
-3. In the **Inspector Window > Depth Save**, set **Load Camera Pose Path** to empty (leave it blank).  
-4. In the **Inspector Window > RGB Save**, set **Load Camera Pose Path** to empty (leave it blank).  
+3. Set **Inspector Window > Depth Save > Load Camera Pose Path** to empty (leave it blank).  
+4. Set **Inspector Window > RGB Save > Load Camera Pose Path** to empty (leave it blank).  
 
 ---
 
 ## Generating RGB Images  
 1. Select **Hierarchy Window > Capsule > Camera**.  
-2. Enable the checkbox for **RGB Save** in the **Inspector Window**.  
-3. In the **Inspector Window > RGB Save**, specify the save folder path in **Save Folder Path**.  
+2. Enable the checkbox for **Inspector Window > RGB Save**.  
+3. Specify the save folder path in **Inspector Window > RGB Save > Save Folder Path**.  
    ![setting](readme_imgs/Unity_figure_RGB_all.png)  
-4. Press the Play button (triangle icon) to automatically start capturing images along the camera path.  
+4. Press the Play button to automatically start capturing images along the camera path.  
    -> RGB images (.png) will be generated in the specified folder.  
 
 ---
@@ -81,10 +81,10 @@ Launch **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**.
    ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)  
    ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)  
 2. Select **Hierarchy Window > Capsule > Camera**.  
-3. Enable the checkbox for **Depth Save** in the **Inspector Window**.  
-4. In the **Inspector Window > Depth Save**, specify the save folder path in **Save Folder Path**.  
+3. Enable the checkbox for **Inspector Window > Depth Save**.  
+4. Specify the save folder path in **Inspector Window > Depth Save > Save Folder Path**.  
    ![setting](readme_imgs/Unity_Depth_all.png)  
-5. Press the **Play button** to automatically start capturing images along the camera path.  
+5. Press the Play button to automatically start capturing images along the camera path.  
    -> Depth image data (.exr) will be generated in the specified folder.
 
 ## How to Check Depth Data   
@@ -108,7 +108,7 @@ pip install matplotlib
 ![fig](readme_imgs/txt_exr.png)
 
 # Download
-The data generated so far can be downloaded from the link below.
+The data generated can be downloaded from the link below.
 ```sh
 
 ```  
