@@ -60,7 +60,7 @@ Run VR-Caps-Unity / Assets / Scenes / Record_scene.unity.
    ![setting](readme_imgs/Unity_select_camerapath_all.png)  
 
 ### Generating from Multiple Camera Paths  
-1. Place multiple camera path CSV files in VR-Caps-Unity / Assets / Resources.  
+1. Place multiple CSV files in VR-Caps-Unity / Assets / Resources.  
 2. Select Hierarchy Window > Capsule > Camera.  
 3. Set Inspector Window > Depth Save > Load Camera Pose Path to **empty** (leave it blank).  
 4. Set Inspector Window > RGB Save > Load Camera Pose Path to **empty** (leave it blank).  
