@@ -22,16 +22,16 @@ This repository provides an interface for generating simulation image data of th
 ```  
 
 ## Launch the Unity Project  
-Run **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**. 
+Run VR-Caps-Unity / Assets / Scenes / Record_scene.unity. 
 
 
 # Generating Camera Path  
 
 ## Recording Camera Path Using GUI
-1. Select **Hierarchy Window > Capsule > Camera**.  
-2. Check the box for **Inspector Window > Camera Mover**.  
-3. Check the box for **Inspector Window > Camera Path Save**.  
-4. Specify the file path for the CSV in **Inspector Window > Camera Path Save > Save Path**.  
+1. Select Hierarchy Window > Capsule > Camera.  
+2. Check the box for Inspector Window > Camera Mover.  
+3. Check the box for Inspector Window > Camera Path Save.  
+4. Specify the file path for the CSV in Inspector Window > Camera Path Save > Save Path.  
 
    ![setting](readme_imgs/Unity_CameraPath_all.png)
 5. Click the play button (triangle icon) to enable camera movement using the mouse and keyboard:  
@@ -53,36 +53,40 @@ Run **VR-Caps-Unity / Assets / Scenes / Record_scene.unity**.
 
 ## How to Specify the Created Camera Path  
 ### Generating from a Single Camera Path  
-1. Select **Hierarchy Window > Capsule > Camera**.  
-2. Specify the path of the CSV file in **Inspector Window > Depth Save > Load Camera Pose Path**.  
-3. Specify the path of the CSV file in **Inspector Window > RGB Save > Load Camera Pose Path**.  
+1. Select Hierarchy Window > Capsule > Camera.  
+2. Specify the path of the CSV file in Inspector Window > Depth Save > Load Camera Pose Path.  
+3. Specify the path of the CSV file in Inspector Window > RGB Save > Load Camera Pose Path.  
+
    ![setting](readme_imgs/Unity_select_camerapath_all.png)  
 
 ### Generating from Multiple Camera Paths  
-1. Place multiple camera path CSV files in **VR-Caps-Unity / Assets / Resources**.  
-2. Select **Hierarchy Window > Capsule > Camera**.  
-3. Set **Inspector Window > Depth Save > Load Camera Pose Path** to empty (leave it blank).  
-4. Set **Inspector Window > RGB Save > Load Camera Pose Path** to empty (leave it blank).  
+1. Place multiple CSV files in VR-Caps-Unity / Assets / Resources.  
+2. Select Hierarchy Window > Capsule > Camera.  
+3. Set Inspector Window > Depth Save > Load Camera Pose Path to **empty** (leave it blank).  
+4. Set Inspector Window > RGB Save > Load Camera Pose Path to **empty** (leave it blank).  
 
 ---
 
 ## Generating RGB Images  
-1. Select **Hierarchy Window > Capsule > Camera**.  
-2. Enable the checkbox for **Inspector Window > RGB Save**.  
-3. Specify the save folder path in **Inspector Window > RGB Save > Save Folder Path**.  
+1. Select Hierarchy Window > Capsule > Camera.  
+2. Enable the checkbox for Inspector Window > RGB Save.  
+3. Specify the save folder path in Inspector Window > RGB Save > Save Folder Path.  
    ![setting](readme_imgs/Unity_figure_RGB_all.png)  
+
 4. Press the Play button to automatically start capturing images along the camera path.  
    -> RGB images (.png) will be generated in the specified folder.  
 
 ---
 
 ## Generating Depth Images  
-1. Go to **Edit Tab > Project Settings > HDRP Default Settings > After Post Process** and select **DepthExample**.  
+1. Go to Edit Tab > Project Settings > HDRP Default Settings > After Post Process and select DepthExample.  
+
    ![setting](readme_imgs/Unity_figure_Depth_edit_tab_all.png)  
    ![setting](readme_imgs/Unity_figure_Depth_after_post_process_all.png)  
-2. Select **Hierarchy Window > Capsule > Camera**.  
-3. Enable the checkbox for **Inspector Window > Depth Save**.  
-4. Specify the save folder path in **Inspector Window > Depth Save > Save Folder Path**.  
+2. Select Hierarchy Window > Capsule > Camera.  
+3. Enable the checkbox for Inspector Window > Depth Save.  
+4. Specify the save folder path in Inspector Window > Depth Save > Save Folder Path.  
+
    ![setting](readme_imgs/Unity_Depth_all.png)  
 5. Press the Play button to automatically start capturing images along the camera path.  
    -> Depth image data (.exr) will be generated in the specified folder.
@@ -101,7 +105,7 @@ pip install matplotlib
 
 2. Copy the path of the exr file.    
 
-3. Specify the copied path in the filename variable within **VR-Caps-Unity/Assets/test_exr.py**.  
+3. Specify the copied path in the filename variable within VR-Caps-Unity/Assets/test_exr.py.  
 
 4. Run test_exr.py in the command prompt.  
 -> The depth shape like the one below will be displayed.  
