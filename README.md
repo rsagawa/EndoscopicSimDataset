@@ -1,6 +1,19 @@
-Simulation Dataset of Endoscopic RGB/Deoth Images
+Simulation Dataset of Endoscopic RGB/Depth Images
 =====
-
+<div style="display: flex; justify-content: space-around;">
+  <div style="text-align: center;">
+    <img src="readme_imgs/CameraScreenShot_RGB.png" alt="Image 1" style="width: auto; height: auto;">
+    <p>RGB</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="readme_imgs/CameraScreenShot_depth.png" alt="Image 2" style="width: auto; height: auto;">
+    <p>Depth</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="readme_imgs/CameraScreenShot_campath_000.png" alt="Image 3" style="width: auto; height: auto;">
+    <p>Move along Camera Path</p>
+  </div>
+</div>
 
 # Overview
 This repository provides an interface for generating simulation image data of the gastrointestinal tract based on the simulation environment [VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy) for capsule endoscopy. It implements a method to add the following two steps to VR-Caps for generating images. The dataset used in the paper [View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148), presented at EMBC2024, can be downloaded [here](#download).
