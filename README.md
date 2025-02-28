@@ -12,7 +12,7 @@ Simulation Dataset of Endoscopic RGB/Depth Images
     </td>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_campath_000.png" alt="Image 3" style="width: auto; height: auto;">
-      <p align="center">Move along Camera path</p>
+      <p align="center">Camera Path (green line)</p>
     </td>
   </tr>
 </table>
