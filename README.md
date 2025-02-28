@@ -3,15 +3,18 @@ Simulation Dataset of Endoscopic RGB/Depth Images
 <table border=0>
   <tr>
     <td style="text-align: center;">
-      <img src="readme_imgs/CameraScreenShot_RGB.png" alt="Image 1" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_RGB_000.png" alt="Image 1" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_RGB_001.png" alt="Image 1" style="width: auto; height: auto;">
       <p align="center">RGB</p>
     </td>
     <td style="text-align: center;">
-      <img src="readme_imgs/CameraScreenShot_depth.png" alt="Image 2" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_depth_000.png" alt="Image 2" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_depth_001.png" alt="Image 2" style="width: auto; height: auto;">
       <p align="center">Depth</p>
     </td>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_campath_000.png" alt="Image 3" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_campath_001.png" alt="Image 3" style="width: auto; height: auto;">
       <p align="center">Camera Path (green line)</p>
     </td>
   </tr>
@@ -20,7 +23,7 @@ Simulation Dataset of Endoscopic RGB/Depth Images
 # Overview
 This repository provides an interface for generating simulation image data of the gastrointestinal tract based on the simulation environment [VR-Caps](https://github.com/CapsuleEndoscope/VirtualCapsuleEndoscopy) for capsule endoscopy. It implements a method to add the following two steps to VR-Caps for generating images. The dataset used in the paper [View Synthesis of Endoscope Images by Monocular Depth Prediction and Gaussian Splatting](https://ieeexplore.ieee.org/abstract/document/10782148), presented at EMBC2024, can be downloaded [here](#download).
 
-- Creating custom camera path using unity GUI  
+- Creating custom camera path using Unity GUI  
 - Generating RGB and Depth Images along camera path  
 
 # Setup
