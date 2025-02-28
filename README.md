@@ -1,20 +1,20 @@
 Simulation Dataset of Endoscopic RGB/Depth Images
 =====
-<table>
-  <!-- <tr> -->
+<table border=0>
+  <tr>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_RGB.png" alt="Image 1" style="width: auto; height: auto;">
-      <p>RGB</p>
+      <p align="center">RGB</p>
     </td>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_depth.png" alt="Image 2" style="width: auto; height: auto;">
-      <p>Depth</p>
+      <p align="center">Depth</p>
     </td>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_campath_000.png" alt="Image 3" style="width: auto; height: auto;">
-      <p>Move along Camera path</p>
+      <p align="center">Move along Camera path</p>
     </td>
-  <!-- </tr> -->
+  </tr>
 </table>
 
 # Overview
