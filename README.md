@@ -3,8 +3,8 @@ Simulation Dataset of Endoscopic RGB/Depth Images
 <table border=0>
   <tr>
     <td style="text-align: center;">
-      <img src="readme_imgs/CameraScreenShot_RGB_000.png" alt="Image 1" style="width: auto; height: auto;">
-      <img src="readme_imgs/CameraScreenShot_RGB_001.png" alt="Image 1" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_rgb_000.png" alt="Image 1" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_rgb_001.png" alt="Image 1" style="width: auto; height: auto;">
       <p align="center">RGB</p>
     </td>
     <td style="text-align: center;">
