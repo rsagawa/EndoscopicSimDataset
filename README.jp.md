@@ -5,17 +5,17 @@
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_rgb_000.png" alt="Image 1" style="width: auto; height: auto;">
       <img src="readme_imgs/CameraScreenShot_rgb_001.png" alt="Image 1" style="width: auto; height: auto;">
-      <p align="center">RGB</p>
+      <p align="center">カラー画像</p>
     </td>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_depth_000.png" alt="Image 2" style="width: auto; height: auto;">
       <img src="readme_imgs/CameraScreenShot_depth_001.png" alt="Image 2" style="width: auto; height: auto;">
-      <p align="center">Depth</p>
+      <p align="center">デプス画像</p>
     </td>
     <td style="text-align: center;">
       <img src="readme_imgs/CameraScreenShot_campath_000.png" alt="Image 3" style="width: auto; height: auto;">
       <img src="readme_imgs/CameraScreenShot_campath_001.png" alt="Image 3" style="width: auto; height: auto;">
-      <p align="center">Camera Path (green line)</p>
+      <p align="center">カメラパス (緑の線)</p>
     </td>
   </tr>
 </table>
