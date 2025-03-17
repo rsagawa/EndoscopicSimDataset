@@ -130,10 +130,8 @@ pip install matplotlib
 ![fig](readme_imgs/txt_exr.png)
 
 # Download
-The data generated can be downloaded from the link below.
-```sh
+The data generated can be downloaded from the link below.  
 https://data.airc.aist.go.jp/cvrt/endoscopic_simulation_dataset.zip
-```  
 
 # Reference
 ```
