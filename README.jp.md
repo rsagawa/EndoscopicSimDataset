@@ -1,4 +1,4 @@
-内視鏡シミュレーション映像データセット
+内視鏡RGB/深度画像シミュレーションデータセット
 =====
 <table border=0>
   <tr>
@@ -60,8 +60,8 @@ VR-Caps-Unity / Assets / Scenes / Record_scene.unityを起動
    ・Q : 上昇, E : 下降  
    ・マウスのドラッグ : 任意回転  
 
-6. スペースキー押下でカメラパスの記録開始  
-7. 再度スペースキー押下でカメラパスの記録終了  
+6. **スペースキ**ー押下でカメラパスの記録開始  
+7. 再度**スペースキー**押下でカメラパスの記録終了  
    -> 保存先にcsvファイルを生成  
 
 
@@ -77,8 +77,8 @@ VR-Caps-Unity / Assets / Scenes / Record_scene.unityを起動
 ### 複数のカメラパスからまとめて生成する場合
 1. VR-Caps-Unity / Assets / Resources に複数のカメラパスcsvファイルを置く
 2. Hierarchy Window > Capsule > Cameraを選択  
-3. Inspector Window > Depth Save > Load Camera Pose Path を空に指定 (何も記載しない)  
-4. Inspector Window > RGB Save > Load Camera Pose Path を空に指定 (何も記載しない)  
+3. Inspector Window > Depth Save > Load Camera Pose Path を空に指定 (**何も記載しない**)  
+4. Inspector Window > RGB Save > Load Camera Pose Path を空に指定 (**何も記載しない**)  
 
 
 ## RGB画像の生成  
