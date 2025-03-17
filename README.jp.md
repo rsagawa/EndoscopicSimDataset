@@ -1,5 +1,24 @@
 内視鏡シミュレーション映像データセット
 =====
+<table border=0>
+  <tr>
+    <td style="text-align: center;">
+      <img src="readme_imgs/CameraScreenShot_rgb_000.png" alt="Image 1" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_rgb_001.png" alt="Image 1" style="width: auto; height: auto;">
+      <p align="center">RGB</p>
+    </td>
+    <td style="text-align: center;">
+      <img src="readme_imgs/CameraScreenShot_depth_000.png" alt="Image 2" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_depth_001.png" alt="Image 2" style="width: auto; height: auto;">
+      <p align="center">Depth</p>
+    </td>
+    <td style="text-align: center;">
+      <img src="readme_imgs/CameraScreenShot_campath_000.png" alt="Image 3" style="width: auto; height: auto;">
+      <img src="readme_imgs/CameraScreenShot_campath_001.png" alt="Image 3" style="width: auto; height: auto;">
+      <p align="center">Camera Path (green line)</p>
+    </td>
+  </tr>
+</table>
 
 
 # 概要
@@ -20,7 +39,7 @@ EMBC2024において発表した論文[View Synthesis of Endoscope Images by Mon
 
 ## レポジトリのクローン
 ```sh
-git clone https://github.com/TakuyaTorii0806/VR-Caps_for_image_generation.git  
+  
 ```  
 
 ## プロジェクトの起動  
@@ -102,10 +121,8 @@ pip install matplotlib
 ![fig](readme_imgs/txt_exr.png)
 
 # ダウンロード
-これまでに生成したデータは、下記からダウンロード可能である。
-```sh
-
-```  
+これまでに生成したデータは、下記からダウンロード可能である。  
+https://data.airc.aist.go.jp/cvrt/endoscopic_simulation_dataset.zip
 
 # Reference
 ```
