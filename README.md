@@ -38,7 +38,7 @@ This repository provides an interface for generating simulation image data of th
 
 ## Clone the repository
 ```sh
-  
+https://github.com/rsagawa/EndoscopicSimDataset.git
 ```  
 
 ## Launch the Unity Project  

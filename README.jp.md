@@ -41,7 +41,7 @@ EMBC2024において発表した論文[View Synthesis of Endoscope Images by Mon
 
 ## レポジトリのクローン
 ```sh
-  
+https://github.com/rsagawa/EndoscopicSimDataset.git
 ```  
 
 ## プロジェクトの起動  
